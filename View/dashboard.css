@@ -1,0 +1,120 @@
+body{
+    border:1px solid black;
+    background-color: rgb(183, 193, 202);
+   }  
+  
+  .text{
+      text-align: center;
+  }
+  
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {height: 550px}
+      
+      /* Set gray background color and 100% height */
+      .sidenav {
+        background-color: #cee4f1;
+        height:auto;
+        
+      }
+          
+      /* On small screens, set height to 'auto' for the grid */
+      @media screen and (max-width: 767px) {
+        .row.content {height: auto;} 
+      }
+      .flip-card {
+  background-color: transparent;
+  width: 150px;
+  height: 125px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+  
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+  
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #cee4f1;
+  color: black;
+  padding-top: 20px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: #cee4f1;
+  color: white;
+  transform: rotateY(180deg);
+  
+}
+      .width{
+        width:275px;
+        background-color:#cee4f1;
+        text-align: center;
+        border:1px solid white;
+      }
+      .well{
+        background-color:#cee4f1 ;
+      }
+      .flex{
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        padding: 10px;
+      }
+      
+      .bg{
+        background-color: dodgerblue;
+      }
+      .chartbg{
+        background-color: rgb(216, 136, 17);
+        border: 1px solid black;
+        justify-content: center;
+        width:420px;
+        height:320px;
+      }
+      .padding{
+        padding: 20px;
+        padding-left: 50px;
+        padding-right: 50px;
+      }
+      .paddingchart{
+        padding: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+      }
+      section {
+        position: absolute;
+        display: none;
+        top: 10px;
+        right: 0;
+        width: 800px;
+        min-height: 400px;
+      }
+      section:first-of-type {
+        display: block;
+      }
+      

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script
+src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
+</script>
+
+ 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  <style>
+  body{
+    border:1px solid black;
+   }  
+  .square {
+    width: 310px;
+    height: 100px;
+    padding-left: 10px;
+    padding-top: 10px;
+    border:1px solid black;
+    
+  }
+  .circle {
+    width: 70px;
+    height: 70px;
+    text-align:left;
+    border-radius: 50%;
+    border:  1px solid black;
+  }
+  .text{
+      text-align: center;
+  }
+  
+      /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
+      .row.content {height: 550px}
+      
+      /* Set gray background color and 100% height */
+      .sidenav {
+        background-color: #87cefa;
+        height:auto;
+        
+      }
+          
+      /* On small screens, set height to 'auto' for the grid */
+      @media screen and (max-width: 767px) {
+        .row.content {height: auto;} 
+      }
+      .width{
+        width:275px;
+        background-color:#87cefa;
+        text-align: center;
+        border:1px solid white;
+      }
+      .well{
+        background-color:#87cefa ;
+      }
+      .flex{
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+</head>
+<body><!--
+  <div class="container-fluid">
+    <div class="row content">
+      <div class="col-sm-3 sidenav hidden-xs">
+        
+        <div class="col-sm-9">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="width">
+                <div class="d-flex align-items-center mb-4">
+                        
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
+                    alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
+                    style="width: 70px;">
+                  <div class="d-flex flex-row align-items-center mb-2">
+                    <p class="text-light bg-dark">Admin</p>
+                    <div class="p-3 mb-2 bg-info text-white">Jack Reacher</div>
+                    <p class="mb-0 me-2"></p>
+                    <button type="button" class="btn btn-primary">Edit</button>
+                  </div>
+                </div>  
+          </div></div></div>
+
+        <ul class="nav nav-pills nav-stacked"><br>
+          <li><a href="#section1">Dashboard</a></li><br><br>
+              <li><a href="#section2">General</a></li><br><br>
+              <li><a href="#section3">Admin users</a></li><br><br>
+              <li><a href="#section3">Mail</a></li><br><br><br><br><hr>
+              <li><a href="#section3">logout</a></li>
+        </ul>
+      </div>
+      </div>
+      <div class="col-sm-9">
+        <div class="well">
+          <div class="text">
+          <h1>Dashboard</h1>
+        </div>
+        </div>
+        <div class="flex">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Primary card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+        <div class="card text-white bg-secondary mb-3" style="max-width: 18rem;">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Secondary card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+        <div class="card text-white bg-success mb-3" style="max-width: 18rem;">
+          <div class="card-header">Header</div>
+          <div class="card-body">
+            <h5 class="card-title">Success card title</h5>
+            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>-->
+      <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+
+<script>
+var xValues = ["Absent %","Present %"];
+var yValues = [25, 75,];
+var barColors = [
+  "#b91d47",
+  "#00aba9",
+];
+
+new Chart("myChart", {
+  type: "pie",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Total attendance"
+    }
+  }
+});
+</script>
+</body>
+</html>
