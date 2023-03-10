@@ -18,7 +18,7 @@ $username = $_POST['Username'];
         $count = mysqli_num_rows($result);  
           
         if($count == 1){   
-            header("Location: http://localhost/EMS/View/Em%20Dashboard.html");
+            header("Location: http://localhost/EMS/View/Employee%20Dashboard.html");
              exit();
         }  
         else{  

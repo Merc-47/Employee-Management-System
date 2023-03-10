@@ -5,6 +5,7 @@ body{
   
   .text{
       text-align: center;
+      justify-content: center;
   }
   
       /* Set height of the grid so .sidenav can be 100% (adjust as needed) */
@@ -90,7 +91,7 @@ body{
         background-color: dodgerblue;
       }
       .chartbg{
-        background-color: rgb(216, 136, 17);
+        background-color:	#8293ee;
         border: 1px solid black;
         justify-content: center;
         width:420px;
@@ -117,4 +118,28 @@ body{
       section:first-of-type {
         display: block;
       }
+
+      table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+      
+      td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+      }
+      
+      tr:nth-child(even) {
+        background-color: #dddddd;
+      }
+      
+      .regform{
+        padding: 20px;
+        padding-left: 40px;
+       
+      }
+      
+  
       

@@ -64,6 +64,84 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
         display: flex;
         justify-content: center;
       }
+      * {
+    box-sizing: border-box;
+  }
+  
+  form {
+    padding: 1em;
+    background: #f9f9f9;
+    border: 1px solid #c1c1c1;
+    margin-top: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+  }
+  form input {
+    margin-bottom: 1rem;
+    background: #fff;
+    border: 1px solid #9c9c9c;
+  }
+  form button {
+    background: lightgrey;
+    padding: 0.7em;
+    border: 0;
+  }
+  form button:hover {
+    background: gold;
+  }
+  
+  label {
+    text-align: right;
+    display: block;
+    padding: 0.5em 1.5em 0.5em 0;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+  }
+  select{
+    float:right;
+    width: 64%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+  }
+  textarea{
+    width: 100%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+  }
+  input:focus {
+    outline: 3px solid gold;
+  }
+  
+  @media (min-width: 400px) {
+    form {
+      overflow: hidden;
+    }
+  
+    label {
+      float: left;
+      width: 200px;
+    }
+  
+    input {
+      float: left;
+      width: calc(100% - 200px);
+    }
+  
+  }
+  .flex{
+    display: flex;
+    
+  }
+  .regform{
+    padding: 20px;
+    padding-left: 40px;
+  }
     </style>
 </head>
 <body><!--
@@ -131,6 +209,26 @@ src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js">
       </div>
       </div>-->
       <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+      <div class="regform">
+        <form class="form1" action="">
+    <table><tr>
+          <td><label>Sender Email </label></td>
+         <td><input id="SenderEmail" type="text"></td></tr>
+         <tr>
+          <td><label>Recipient Email </label></td>
+         <td><input id="Recipient" type="text"></td></tr>
+         <tr>
+          <td><label>Subject </label></td>
+         <td><input id="Subject" type="text"></td></tr>
+          <tr>
+          <td> <label>Message</label></td>
+         <td> <textarea id="Reason" rows="5" cols="50"></textarea></td></tr>
+          </table>
+          <div class="text">
+            <button>Send</button>
+          </div>
+        </form>
+        </div>
 
 <script>
 var xValues = ["Absent %","Present %"];

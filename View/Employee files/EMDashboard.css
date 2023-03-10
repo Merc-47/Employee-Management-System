@@ -1,0 +1,117 @@
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+  .bg{
+    background-color: dodgerblue;
+  }
+  .width{
+    width:275px;
+    background-color:#cee4f1;
+    text-align: center;
+    border:1px solid white;
+  }
+  .well{
+    background-color:#289de0 ;
+  
+  }
+  body{
+    
+    background-color: rgb(236, 221, 221);
+   }  
+  
+  .text{
+      text-align: center;
+      justify-content: center;
+    
+  }
+  * {
+    box-sizing: border-box;
+  }
+  
+  form {
+    padding: 1em;
+    background: #f9f9f9;
+    border: 1px solid #c1c1c1;
+    margin-top: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 1em;
+  }
+  form input {
+    margin-bottom: 1rem;
+    background: #fff;
+    border: 1px solid #9c9c9c;
+  }
+  form button {
+    background: lightgrey;
+    padding: 0.7em;
+    border: 0;
+  }
+  form button:hover {
+    background: gold;
+  }
+  
+  label {
+    text-align: right;
+    display: block;
+    padding: 0.5em 1.5em 0.5em 0;
+  }
+  
+  input {
+    width: 100%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+  }
+  select{
+    float:right;
+    width: 64%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+  }
+  textarea{
+    width: 100%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+  }
+  input:focus {
+    outline: 3px solid gold;
+  }
+  
+  @media (min-width: 400px) {
+    form {
+      overflow: hidden;
+    }
+  
+    label {
+      float: left;
+      width: 200px;
+    }
+  
+    input {
+      float: left;
+      width: calc(100% - 200px);
+    }
+  
+  }
+  .flex{
+    display: flex;
+    
+  }
+  .regform{
+    padding: 20px;
+    padding-left: 40px;
+  }
+  
