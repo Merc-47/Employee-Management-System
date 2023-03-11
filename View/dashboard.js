@@ -48,3 +48,4 @@ new Chart("myChartLine", {
     text: "Total Employee progress"
   }}
 });
+
