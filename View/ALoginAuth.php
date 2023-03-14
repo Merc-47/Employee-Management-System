@@ -43,7 +43,7 @@ $username = $_POST['username'];
         $count = mysqli_num_rows($result);  
           
         if($count == 1){   
-            header("Location: http://localhost/EMS/View/Admin%20Dashboard.html");
+            header("Location: http://localhost/EMS/View/AdminDashboard.php");
              exit();
         }  
         else{  
