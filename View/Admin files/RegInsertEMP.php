@@ -1,25 +1,4 @@
-
-        
-       /*$conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
-       }
-        $sql="SELECT Cafe_ID,Emp_ID,Item,Quantity,Price FROM cafeteria";
-        $result=$conn->query($sql); 
-        if($result-> num_rows > 0){
-            while($rows=$result->fetch_assoc()){
-                echo"<tr><td>".$rows["Cafe_ID"]."</td><td>".$rows["Emp_ID"]."</td><td>".$rows["Item"]
-                ."</td><td>".$rows["Quantity"]."</td><td>".$rows["Price"]."</td></tr>";
-
-               
-            }
-            echo"</table>";
-        }
-        else{
-             echo"0 reult";
-        }
-        $conn->close();*/
-        <?php
+<?php
         $EmployeeID= $_POST['Employee_ID'];
         $FName= $_POST['FName'];
         $LName= $_POST['LName'];
@@ -45,8 +24,8 @@
        }
         ?>
          <html>
-            <link rel="stylesheet" href="Admin files/Dashboard.css">
+            <link rel="stylesheet" href="Dashboard.css">
             <div class="text">
-            <button><a href="updateEx.php">Return to Employee Registration</a></button>
+            <button><a href="RegisterEmployees.php">Return to Employee Registration</a></button>
             </div>
             </html>

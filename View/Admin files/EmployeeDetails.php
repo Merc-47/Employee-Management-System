@@ -56,7 +56,7 @@
     
         </table><br>
         <div class="text">
-      <button><a href="RegisterEmployees.html">Insert</a></button>
+      <button><a href="RegisterEmployees.php">Insert</a></button>
       </div>
 </body>
 </html>

@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard</title>
+  <title>Employee Dashboard</title>
   
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
@@ -14,6 +14,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <link rel="stylesheet"href="dashboard.css">
   <link rel="stylesheet" href="Mail.css">
+  
 </head>
 <body>
   <div class="container-fluid">
@@ -46,8 +47,8 @@
         <ul class="nav nav-pills nav-stacked"><br>
         
           <li data-rel="1" class="active"><a href="#section1">Dashboard</a></li><br><br>
-          <li data-rel="2" ><a href="#section2">General</a></li><br><br>
-          <li data-rel="3"><a href="#section3">Admin users</a></li><br><br>
+          <li data-rel="2" ><a href="#section2">Progress</a></li><br><br>
+          <li data-rel="3"><a href="#section3">Work Material</a></li><br><br>
           <li data-rel="4"><a href="#section4">Mail</a></li><br><br><br><br><br><br><br><br><hr>
           <li data-rel="5"><a href="#section5">Logout</a></li><br>
         </ul>
@@ -66,10 +67,10 @@
           <div class="flip-card">
             <div class="flip-card-inner">
               <div class="flip-card-front">
-                <h3>Employee's Details</h3> 
+                <h3>Attendance</h3> 
               </div>
               <div class="flip-card-back">
-                <a href="Admin files/EmployeeDetails.php"><img src="Images/employee.png" alt="Avatar" style="width:150px;height:125px;"></a>
+                <a href="Employee files/Attendance.php"><img src="Images/attendance.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
               </div>
             </div>
           </div></div>
@@ -78,10 +79,10 @@
           <div class="flip-card">
             <div class="flip-card-inner">
               <div class="flip-card-front">
-                <h3>Register Employees</h3> 
+                <h3>Leave Form</h3> 
               </div>
               <div class="flip-card-back">
-                <a href="Admin files/RegisterEmployees.php"><img src="Images/registration.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
+                <a href="Employee files/LeaveForm.php"><img src="Images/leave.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
               </div>
             </div>
           </div></div>
@@ -90,10 +91,10 @@
           <div class="flip-card">
             <div class="flip-card-inner">
               <div class="flip-card-front">
-                <h3>Departments</h3> 
+                <h3>FeedBack Form</h3> 
               </div>
               <div class="flip-card-back">
-                <a href="Admin files/Departments.php"><img src="Images/department.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
+                <a href="Employee files/FeedBackForm.php"><img src="Images/feedback.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
               </div>
             </div>
           </div></div>      
@@ -104,48 +105,10 @@
           <div class="flip-card">
             <div class="flip-card-inner">
               <div class="flip-card-front">
-                <h3>Attendance Management</h3> 
-              </div>
-              <div class="flip-card-back">
-                <a href="Admin files/AttendanceManagement.php"><img src="Images/attendance.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
-              </div>
-            </div>
-          </div></div>
-
-          <div class="padding">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h3>Leave Management</h3> 
-              </div>
-              <div class="flip-card-back">
-                <a href="Admin files/LeaveManagement.php"> <img src="Images/leave.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
-              </div>
-            </div>
-          </div></div>
-
-          <div class="padding">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h3>FeedBack Management</h3> 
-              </div>
-              <div class="flip-card-back">
-                <a href="Admin files/FeedbackManagement.php"> <img src="Images/feedback.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
-              </div>
-            </div>
-          </div></div>      
-        </div>
-
-        <div class="flex">
-          <div class="padding">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
                 <h3>Payroll</h3> 
               </div>
               <div class="flip-card-back">
-                <a href="Admin files/Payroll.php"> <img src="Images/payroll.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
+                <a href="Employee files/EMPayroll.php"><img src="Images/payroll.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
               </div>
             </div>
           </div></div>
@@ -157,10 +120,22 @@
                 <h3>Cafeteria</h3> 
               </div>
               <div class="flip-card-back">
-                <a href="Admin files/Cafeteria.php"><img src="Images/cafeteria.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
+                <a href="Employee files/EMCafeteria.php"> <img src="Images/cafeteria.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
               </div>
             </div>
           </div></div>
+
+          <div class="padding">
+          <div class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <h3>Extras</h3> 
+              </div>
+              <div class="flip-card-back">
+                <a href="Employee files/Extras.html"> <img src="Images/generate.png" alt="Avatar" style="width:150px;height:125px;"></a>
+              </div>
+            </div>
+          </div></div>      
         </div>
 
       </div>
@@ -169,7 +144,7 @@
       <div class="col-sm-9">
         <div class="well">
           <div class="text">
-          <h1>General</h1>
+          <h1>Progress</h1>
         </div>
       </div>
    <div class="flex">
@@ -180,43 +155,21 @@
       <div class="chartbg"><canvas id="myChartLine" style="width:150px;height: 100px;"></canvas></div>
     </div>
     </div>
-    <div class="flex">
-      <div class="padding">
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h3>Generate Report</h3> 
-          </div>
-          <div class="flip-card-back">
-            <a href="Admin files/GenerateReport.html"><img src="Images/generate.png" alt="Avatar" style="width:150px;height:125px;"></a>
-          </div>
-        </div>
-      </div></div>
-
-      <div class="padding">
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h3>Project Assinment</h3> 
-          </div>
-          <div class="flip-card-back">
-            <a href="Admin files/ProjectAssinment.html"><img src="Images/project.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
-          </div>
-        </div>
-      </div></div>
-
-      <div class="padding">
-      <div class="flip-card">
-        <div class="flip-card-inner">
-          <div class="flip-card-front">
-            <h3>Employee Progress</h3> 
-          </div>
-          <div class="flip-card-back">
-            <a href="Admin files/EmployeeProgress.html"><img src="Images/progress.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
-          </div>
-        </div>
-      </div></div>      
-    </div>
+    <table>
+      <tr>
+        <th>Current Assined Team</th>
+        <th>Succesful Assinments</th>
+        <th>Total Assinments</th>
+      </tr>
+      <tr>
+        <td>project seven</td>
+        <td>27</td>
+        <td>30</td>
+      </tr></table><br>
+      <table>
+      <tr><th>Supervisor feedback</th>
+        <td>Excellent, still there is more room for improvement</td></tr>
+    </table>
     </div>
       
     </section>
@@ -224,38 +177,42 @@
       <div class="col-sm-9">
         <div class="well">
           <div class="text">
-          <h1>Admin Users</h1>
+          <h1>Work Material</h1>
         </div>
         </div>
         <table>
-        <tr>
-            <th>Admin_ID</th>
-            <th>FName</th>
-            <th>LName</th>
-            <th>UserName</th>
-            <th>Password</th>
-            <th>Authority</th>
-        </tr>
-        <?php
-       $conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
-       }
-        $sql="SELECT Admin_ID,FName,LName,UserName,Password,Authority FROM admin";
-        $result=$conn->query($sql);
-        if($result-> num_rows > 0){
-            while($rows=$result->fetch_assoc()){
-                echo"<tr><td>".$rows["Admin_ID"]."</td><td>".$rows["FName"]."</td><td>".$rows["LName"]
-                ."</td><td>".$rows["UserName"]."</td><td>".$rows["Password"]."</td><td>".$rows["Authority"]."</td></tr>";
-            }
-            echo"</table>";
-        }
-        else{
-             echo"0 reult";
-        }
-        $conn->close();
-        ?>
-    </table>
+          <tr>
+            <th>Admin</th>
+            <th>Status</th>
+            
+          </tr>
+          <tr>
+            <td>Jack Reacher</td>
+            <td>online</td>
+            
+          </tr>
+          <tr>
+            <td>David Goggins</td>
+            <td>offline</td>
+            
+          </tr>
+          <tr>
+            <td>Ernst Handel</td>
+            <td>offline</td>
+            
+          </tr>
+          <tr>
+            <td>Giorno Giovanna</td>
+            <td>offline</td>
+            
+          </tr>
+          <tr>
+            <td>Edward Kenway</td>
+            <td>offline</td>
+           
+          </tr>
+          
+        </table>
       </div>
 
     </section>
@@ -266,36 +223,32 @@
           <h1>Mail</h1>
         </div>
         </div>
-        
-          <div class="regform">
-            <form class="form1" action="">
+        <div class="regform">
+          <form class="form1" action="">
 
-              <label>Sender Email </label>
-           <input id="SenderEmail" type="text">
-           
-            <label>Recipient Email </label>
-           <input id="Recipient" type="text">
+            <label>Sender Email </label>
+         <input id="SenderEmail" type="text">
+         
+          <label>Recipient Email </label>
+         <input id="Recipient" type="text">
 
-            <label>Subject </label>
-           <input id="Subject" type="text">
-            
-             <label>Message</label>
-            <textarea id="Reason" rows="5" cols="50"></textarea>
-
-            <label for="myfile">Select files:</label>
-            <input type="file" id="myfile" name="myfile" multiple>
-            
-            <div class="text">
-              <button>Send</button>
-              
-            </div>
-            
-          </form>
-          <div class="text">
-            <br><br> <button>Inbox</button>
-          </div>
-          </div>
+          <label>Subject </label>
+         <input id="Subject" type="text">
           
+           <label>Message</label>
+          <textarea id="Reason" rows="5" cols="50"></textarea>
+
+          <label for="myfile">Select files:</label>
+        <input type="file" id="myfile" name="myfile" multiple>
+          
+          <div class="text">
+            <button>Send</button>
+          </div>
+        </form>
+        <div class="text">
+          <br><br> <button>Inbox</button>
+        </div>
+        </div>
       </div>
     </section>
     <section>
