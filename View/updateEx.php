@@ -12,51 +12,58 @@
 <body>
 <table>
         <tr>
-            <th>Admin_ID</th>
-            <th>FName</th>
-            <th>LName</th>
-            <th>UserName</th>
+            <th>Reg ID</th>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Department ID</th>
+            <th>Title</th>
+            <th>User Name</th>
             <th>Password</th>
-            <th>Authority</th>
-            <th>update</th>
-            <th>delete</th>
+            <th>Update</th>
+            <th>Delete</th>
         </tr>
         <?php 
        $conn=mysqli_connect("localhost","root","","employee_management_system");
        if($conn->connect_error){
         die("connection failed:".$conn->connect_error);
        }
-        $sql="SELECT Admin_ID,FName,LName,UserName,Password,Authority FROM admin";
+        $sql="SELECT * FROM registration";
        
         $result=mysqli_query($conn,$sql);
         if(!$result){
-            die("query failed".mysqli_error($conn));
+            die("retreiving failed".mysqli_error($conn));
         }
 
         else{
             while($row=mysqli_fetch_assoc($result)){
                   ?>
             <tr>
-                  <td><?php echo $row['Admin_ID'];?></td>
+                  <td><?php echo $row['Reg_ID'];?></td>
+                  <td><?php echo $row['Employee_ID'];?></td>
                   <td><?php echo $row['FName'];?></td>
                   <td><?php echo $row['LName'];?></td>
+                  <td><?php echo $row['Email'];?></td>
+                  <td><?php echo $row['Dep_ID'];?></td>
+                  <td><?php echo $row['Title'];?></td>
                   <td><?php echo $row['UserName'];?></td>
                   <td><?php echo $row['Password'];?></td>
-                  <td><?php echo $row['Authority'];?></td>
-                  <td><a href="example.php?id=<?php echo $row['Admin_ID'];?>">Update</a></td>
-                  <td><a href="#" >Delete</a></td>
+                  <td><a href="example.php?Reg_ID=<?php echo $row['Reg_ID'];?>">Update</a></td>
+                  <td><a href="example.php?Reg_ID=<?php echo $row['Reg_ID'];?>" >Delete</a></td>
             </tr>
             <?php
             }
       }
+     
         ?>
-        
-      
-        
-
     </table>
-
-      
+<?php /*
+if(isset($_GET['update_msg'])){
+echo"<h6>".$_GET['update_msg']."</h6>";
+}*/
+?>
+   
 </body>
 </html>
 <?php
@@ -82,5 +89,7 @@
               echo"registration successful";
               $stmt->Close();
               $conn->Close();
-       }*/
+       }
+       */
       ?>
+      
