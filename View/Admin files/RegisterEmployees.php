@@ -17,6 +17,67 @@
         <h1>Employee Registration</h1>
       </div>
       </div>
+
+      <table>
+        <tr>
+            <th>Reg ID</th>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Department ID</th>
+            <th>Title</th>
+            <th>User Name</th>
+            <th>Password</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <?php include('dbConnection.php');?>
+        <?php 
+        $sql="SELECT * FROM registration";
+       
+        $result=mysqli_query($conn,$sql);
+        if(!$result){
+            die("retreiving failed".mysqli_error($conn));
+        }
+
+        else{
+            while($row=mysqli_fetch_assoc($result)){
+                  ?>
+            <tr>
+                  <td><?php echo $row['Reg_ID'];?></td>
+                  <td><?php echo $row['Employee_ID'];?></td>
+                  <td><?php echo $row['FName'];?></td>
+                  <td><?php echo $row['LName'];?></td>
+                  <td><?php echo $row['Email'];?></td>
+                  <td><?php echo $row['Dep_ID'];?></td>
+                  <td><?php echo $row['Title'];?></td>
+                  <td><?php echo $row['UserName'];?></td>
+                  <td><?php echo $row['Password'];?></td>
+                  <td><a href="RegUpdateEMP.php?Reg_ID=<?php echo $row['Reg_ID'];?>">Update</a></td>
+                  <td><a href="RegDeleteEMP.php?Reg_ID=<?php echo $row['Reg_ID'];?>" >Delete</a></td>
+                 
+            </tr>
+            <?php
+            }
+      }
+     
+        ?>
+    </table> <br><br><br>
+    <center>
+<?php 
+if(isset($_GET['update_msg'])){
+echo"<h4>".$_GET['update_msg']."</h4>";
+}
+if(isset($_GET['delete_msg'])){
+    echo"<h4>".$_GET['delete_msg']."</h4>";
+    }
+?>
+    </center>
+    <div class="text">
+        <h1>Register Employees Profile</h1>
+      </div>
+
       <div class="flex">
         <div class="regform">
       <form class="form1" action="RegInsertEMP.php" method="post" >
@@ -55,7 +116,6 @@
       </div>
     </div>
       
-      
-
 </body>
+    
 </html>
