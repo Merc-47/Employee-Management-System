@@ -1,10 +1,8 @@
 <?php include('dbConnection.php');?>
 
 <?php
-if(isset($_POST['Update_EMP'])){
-  if(isset($_GET['Employee_ID'])){
-  $UPEmployeeID=$_GET['Employee_ID'];
-  }
+if(isset($_POST['buttonAdd'])){
+  
 $EmpID=$_POST['Employee_ID'];
 $FName=$_POST['FirstName'];
 $LName=$_POST['LastName'];
@@ -37,7 +35,7 @@ if(!$result){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Employee Insertion</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="Dashboard.css">
 </head>
@@ -89,7 +87,7 @@ if(!$result){
         <input id="Salary" name="Salary" type="text" >
 
         <div class="text">
-        <button id="Update_EMP"  name="Update_EMP" type="submit" value="UPDATE">Submit</button>
+        <button id="buttonAdd"  name="buttonAdd" type="submit" value="UPDATE">Submit</button>
       </div>
       </form>
 <br><br><br>

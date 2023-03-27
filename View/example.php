@@ -1,10 +1,5 @@
-
-<?php
- $conn=mysqli_connect("localhost","root","","employee_management_system");
- if($conn->connect_error){
-  die("connection failed:".$conn->connect_error);
- }
- 
+<?php include('conn.php');?>
+<?php 
  if(isset($_GET['Reg_ID'])){
   $RegID=$_GET['Reg_ID'];
  
@@ -42,7 +37,7 @@ $result=mysqli_query($conn,$sql);
 if(!$result){
     die("query failed".mysqli_error($conn));
 }else{
-  header('location:updateEx.php?update_msg=successfully updated');
+  header('location:updateEx.php?update_msg=Successfully updated!');
 }
 
 }

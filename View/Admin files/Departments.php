@@ -18,36 +18,101 @@
     
     <table>
     <tr>
-          <th>Dep_ID</th>
-          <th>DName</th>
+          <th>Department_ID</th>
+          <th>Department Name</th>
           <th>Managers</th>
           <th>Employees</th>
-          
           <th>Update</th>
           <th>Delete</th>
         </tr>
-        <?php
-       $conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
+        <?php include('dbConnection.php');?>
+      <?php
+       $sql="SELECT * FROM department";
+      
+       $result=mysqli_query($conn,$sql);
+       if(!$result){
+           die("query failed".mysqli_error($conn));
        }
-        $sql="SELECT Dep_ID,DName,Managers,Employees FROM department";
-        $result=$conn->query($sql); 
-        if($result-> num_rows > 0){
-            while($rows=$result->fetch_assoc()){
-                echo"<tr><td>".$rows["Dep_ID"]."</td><td>".$rows["DName"]."</td><td>".$rows["Managers"]
-                ."</td><td>".$rows["Employees"]."</td></tr>";
-            }
-            echo"</table>";
+
+       else{
+           while($row=mysqli_fetch_assoc($result)){
+                 ?>
+           <tr>
+                 <td><?php echo $row['Dep_ID'];?></td>
+                 <td><?php echo $row['DName'];?></td>
+                 <td><?php echo $row['Managers'];?></td>
+                 <td><?php echo $row['Employees'];?></td>
+                 <td><a href="DepUpdate.php?Dep_ID=<?php echo $row['Dep_ID'];?>">Update</a></td>
+                 <td><a href="DepDelete.php?Dep_ID=<?php echo $row['Dep_ID'];?>" >Delete</a></td>
+           </tr>
+           <?php
+           }
+     }
+       ?>
+        </table><br>
+
+        <?php
+      if(isset($_POST['buttonAdd'])){
+        $DepID= $_POST['Dep_ID'];
+        $DName= $_POST['DName'];
+        $Managers= $_POST['Managers'];
+        $Employees= $_POST['Employees'];
+        
+
+        $sql="INSERT into department (Dep_ID,DName,Managers,Employees)
+        values('$DepID','$DName','$Managers','$Employees')";
+        $result=mysqli_query($conn,$sql);
+        if(!$result){
+            die("query failed".mysqli_error($conn));
+        }else{
+          header('location:Departments.php?insert_msg=Data has been successfully Inserted!');
         }
-        else{
-             echo"0 reult";
-        }
-        $conn->close();
+      }
         ?>
-            </table><br>
-            <div class="text">
-            <button>Insert</button>
-          </div>
+        <center>
+<?php 
+if(isset($_GET['update_msg'])){
+echo"<h4>".$_GET['update_msg']."</h4>";
+}
+if(isset($_GET['delete_msg'])){
+    echo"<h4>".$_GET['delete_msg']."</h4>";
+    }
+   
+?>
+    </center>
+    <div class="text">
+        <h1>Add New Department</h1>
+      </div>
+
+      <div class="flex">
+        <div class="regform">
+      <form class="form1" action="Departments.php" method="post" >
+  
+        <label>Department ID</label>
+        <input id="DepID" name="Dep_ID" type="text">
+  
+        <label>Department Name</label>
+        <input id="DName" name="DName" type="text">
+  
+        <label>Managers</label>
+        <input id="Managers" name="Managers" type="text">
+  
+        <label>Employees</label>
+        <input id="Employees" name="Employees" type="text">
+  
+        <div class="text">
+        <button id="buttonAdd"  name="buttonAdd" type="submit" value="UPDATE">Insert</button>
+      </div>
+      </form>
+    </div>
+    </div>
+    <center>
+      <?php
+       if(isset($_GET['insert_msg'])){
+        echo"<h4>".$_GET['insert_msg']."</h4>";
+        }
+      ?>
+      </center>
+            
 </body>
 </html>

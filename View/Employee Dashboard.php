@@ -1,3 +1,4 @@
+<?php include("auth_session.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,9 +32,9 @@
                     alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
                     style="width: 70px;">
                   <div class="d-flex flex-row align-items-center mb-2">
-                    <p class="text-light bg-dark">Admin</p>
+                    <p class="text-light bg-dark">Employee</p>
                     <div class="bg">
-                    <p class="text-light bg-dark">Jack Reacher</p>
+                    <p class="text-light bg-dark"><?php echo $_SESSION['UserName']; ?></p>
                   </div>
                     <p class="mb-0 me-2"></p>
                     <nav>
@@ -50,7 +51,7 @@
           <li data-rel="2" ><a href="#section2">Progress</a></li><br><br>
           <li data-rel="3"><a href="#section3">Work Material</a></li><br><br>
           <li data-rel="4"><a href="#section4">Mail</a></li><br><br><br><br><br><br><br><br><hr>
-          <li data-rel="5"><a href="#section5">Logout</a></li><br>
+          <li data-rel="5"><a href="#section5"><a href="logout.php">Logout</a></a></li><br>
         </ul>
       </nav>
       </div>
@@ -157,19 +158,39 @@
     </div>
     <table>
       <tr>
+        <th>Employee ID</th>
         <th>Current Assined Team</th>
-        <th>Succesful Assinments</th>
+        <th>Successful Assinments</th>
         <th>Total Assinments</th>
       </tr>
-      <tr>
-        <td>project seven</td>
-        <td>27</td>
-        <td>30</td>
-      </tr></table><br>
+      <?php include('Admin files/dbConnection.php');?>
+      <?php
+       $sql="SELECT * FROM progress";
+      
+       $result=mysqli_query($conn,$sql);
+       if(!$result){
+           die("query failed".mysqli_error($conn));
+       }
+
+       else{
+           while($row=mysqli_fetch_assoc($result)){
+                 ?>
+           <tr>
+                 <td><?php echo $row['Emp_ID'];?></td>
+                 <td><?php echo $row['CurrentTeam'];?></td>
+                 <td><?php echo $row['S_Assinments'];?></td>
+                 <td><?php echo $row['T_Assinments'];?></td>
+           </tr>
+    </table>
+           <br>
       <table>
       <tr><th>Supervisor feedback</th>
-        <td>Excellent, still there is more room for improvement</td></tr>
+        <td><?php echo $row['S_Feedback'];?></td></tr>
     </table>
+    <?php
+           }
+     }
+       ?>
     </div>
       
     </section>

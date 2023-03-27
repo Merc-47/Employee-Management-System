@@ -24,11 +24,8 @@
             <th>Update</th>
             <th>Delete</th>
         </tr>
+        <?php include('conn.php');?>
         <?php 
-       $conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
-       }
         $sql="SELECT * FROM registration";
        
         $result=mysqli_query($conn,$sql);
@@ -50,7 +47,7 @@
                   <td><?php echo $row['UserName'];?></td>
                   <td><?php echo $row['Password'];?></td>
                   <td><a href="example.php?Reg_ID=<?php echo $row['Reg_ID'];?>">Update</a></td>
-                  <td><a href="example.php?Reg_ID=<?php echo $row['Reg_ID'];?>" >Delete</a></td>
+                  <td><a href="Delete.php?Reg_ID=<?php echo $row['Reg_ID'];?>" >Delete</a></td>
             </tr>
             <?php
             }
@@ -58,12 +55,16 @@
      
         ?>
     </table>
-<?php /*
+    <center>
+<?php 
 if(isset($_GET['update_msg'])){
-echo"<h6>".$_GET['update_msg']."</h6>";
-}*/
+echo"<h4>".$_GET['update_msg']."</h4>";
+}
+if(isset($_GET['delete_msg'])){
+    echo"<h4>".$_GET['delete_msg']."</h4>";
+    }
 ?>
-   
+    </center>
 </body>
 </html>
 <?php

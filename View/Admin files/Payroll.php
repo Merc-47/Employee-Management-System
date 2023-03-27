@@ -1,3 +1,27 @@
+<?php include('dbConnection.php');?>
+<?php
+if(isset($_POST['buttonAdd'])){
+       
+       $EmpID= $_POST['Emp_ID'];
+       $DepID= $_POST['Dep_ID'];
+       $Wage= $_POST['Wage'];
+       $Allowance= $_POST['Allowance'];
+       $Deductions= $_POST['Deductions'];
+       $Taxes= $_POST['Taxes'];
+       $WorkHours= $_POST['WorkHours'];
+       $Salary= $_POST['Salary'];
+
+        $sql="INSERT into payroll (Emp_ID,Dep_ID,Wage,Allowance,Deductions,Taxes,WorkHours,Salary)
+        values('$EmpID','$DepID','$Wage','$Allowance','$Deductions','$Taxes','$WorkHours','$Salary')";
+        $result=mysqli_query($conn,$sql);
+        if(!$result){
+            die("query failed".mysqli_error($conn));
+        }else{
+          header('location:Payroll.php?insert_msg=Payroll has been submitted!');
+        }
+      }
+        ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,35 +48,92 @@
           <th>Allowance</th>
           <th>Deductions</th>
           <th>Taxes</th>
-          <th>Attendance_ID</th>
           <th>WorkHours</th>
           <th>Salary</th>
           <th>Update</th>
           <th>Delete</th>
         </tr>
         <?php
-       $conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
-       }
-        $sql="SELECT Payroll_ID,Emp_ID,Dep_ID,Wage,Allowance,Deductions,Taxes,Attend_ID,WorkHours,Salary FROM payroll";
-        $result=$conn->query($sql); 
-        if($result-> num_rows > 0){
-            while($rows=$result->fetch_assoc()){
-                echo"<tr><td>".$rows["Payroll_ID"]."</td><td>".$rows["Emp_ID"]."</td><td>".$rows["Dep_ID"]
-                ."</td><td>".$rows["Wage"]."</td><td>".$rows["Allowance"]."</td><td>".$rows["Deductions"]."</td><td>".$rows["Taxes"]
-                ."</td><td>".$rows["Attend_ID"]."</td><td>".$rows["WorkHours"]."</td><td>".$rows["Salary"]."</td></tr>";
-            }
-            echo"</table>";
+        $sql="SELECT * FROM payroll";
+       
+        $result=mysqli_query($conn,$sql);
+        if(!$result){
+            die("retreiving failed".mysqli_error($conn));
         }
+
         else{
-             echo"0 reult";
+            while($row=mysqli_fetch_assoc($result)){
+                  ?>
+            <tr>
+                  <td><?php echo $row['Payroll_ID'];?></td>
+                  <td><?php echo $row['Emp_ID'];?></td>
+                  <td><?php echo $row['Dep_ID'];?></td>
+                  <td><?php echo $row['Wage'];?></td>
+                  <td><?php echo $row['Allowance'];?></td>
+                  <td><?php echo $row['Deductions'];?></td>
+                  <td><?php echo $row['Taxes'];?></td>
+                  <td><?php echo $row['WorkHours'];?></td>
+                  <td><?php echo $row['Salary'];?></td>
+                  <td><a href="PayrollUpdate.php?Payroll_ID=<?php echo $row['Payroll_ID'];?>">Update</a></td>
+                  <td><a href="PayrollDelete.php?Payroll_ID=<?php echo $row['Payroll_ID'];?>" >Delete</a></td>
+                 
+            </tr>
+            <?php
+            }
+      }
+       ?>
+        </table>
+        <center>
+      <?php
+       if(isset($_GET['delete_msg'])){
+        echo"<h4>".$_GET['delete_msg']."</h4>";
         }
-        $conn->close();
-        ?>
-              </table><br>
-              <div class="text">
-              <button>Insert</button>
-            </div>
+        if(isset($_GET['update_msg'])){
+            echo"<h4>".$_GET['update_msg']."</h4>";
+            }
+      ?>
+      </center> <br><br><br>
+        <div class="text">
+        <h1>Insert Payroll</h1>
+      </div>
+              <div class="regform">
+      <form class="form1" action="Payroll.php" method="post">
+  
+        <label>Emp ID</label>
+        <input id="EmpID" name="Emp_ID" type="text">
+  
+        <label>Dep ID</label>
+        <input id="DepID" name="Dep_ID" type="text">
+
+        <label>Wage</label>
+        <input id="Wage" name="Wage" type="text">
+  
+        <label>Allowance</label>
+        <input id="Allowance" name="Allowance" type="text">
+  
+        <label>Deductions</label>
+        <input id="Deductions" name="Deductions" type="text">
+
+        <label>Taxes</label>
+        <input id="Taxes" name="Taxes" type="text">
+  
+        <label>Work Hours</label>
+        <input id="WorkHours" name="WorkHours" type="text">
+
+        <label>Salary</label>
+        <input id="Salary" name="Salary" type="text">
+  
+        <div class="text">
+        <button id="buttonAdd"  name="buttonAdd" type="submit" value="UPDATE">Submit</button>
+          </div>
+      </form>
+      </div>
+      <center>
+      <?php
+       if(isset($_GET['insert_msg'])){
+        echo"<h4>".$_GET['insert_msg']."</h4>";
+        }
+      ?>
+      </center>
 </body>
 </html>

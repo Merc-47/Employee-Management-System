@@ -1,3 +1,4 @@
+<?php include("auth_session.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +16,7 @@
   <link rel="stylesheet"href="dashboard.css">
   <link rel="stylesheet" href="Mail.css">
 </head>
+
 <body>
   <div class="container-fluid">
     <div class="row content">
@@ -32,7 +34,7 @@
                   <div class="d-flex flex-row align-items-center mb-2">
                     <p class="text-light bg-dark">Admin</p>
                     <div class="bg">
-                    <p class="text-light bg-dark">Jack Reacher</p>
+                    <p class="text-light bg-dark"><?php echo $_SESSION['UserName']; ?></p></p>
                   </div>
                     <p class="mb-0 me-2"></p>
                     <nav>
@@ -49,7 +51,7 @@
           <li data-rel="2" ><a href="#section2">General</a></li><br><br>
           <li data-rel="3"><a href="#section3">Admin users</a></li><br><br>
           <li data-rel="4"><a href="#section4">Mail</a></li><br><br><br><br><br><br><br><br><hr>
-          <li data-rel="5"><a href="#section5">Logout</a></li><br>
+          <li data-rel="5"><a href="#section5"><a href="logout.php">Logout</a></a></li><br>
         </ul>
       </nav>
       </div>
@@ -188,7 +190,7 @@
             <h3>Generate Report</h3> 
           </div>
           <div class="flip-card-back">
-            <a href="Admin files/GenerateReport.html"><img src="Images/generate.png" alt="Avatar" style="width:150px;height:125px;"></a>
+            <a href="Admin files/GenerateReport.php"><img src="Images/generate.png" alt="Avatar" style="width:150px;height:125px;"></a>
           </div>
         </div>
       </div></div>
@@ -212,7 +214,7 @@
             <h3>Employee Progress</h3> 
           </div>
           <div class="flip-card-back">
-            <a href="Admin files/EmployeeProgress.html"><img src="Images/progress.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
+            <a href="Admin files/EmployeeProgress.php"><img src="Images/progress.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
           </div>
         </div>
       </div></div>      
@@ -298,14 +300,7 @@
           
       </div>
     </section>
-    <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Logout</h1>
-        </div>
-        </div></div>
-    </section>
+    
     <section>
       <div class="col-sm-9">
         <div class="well">

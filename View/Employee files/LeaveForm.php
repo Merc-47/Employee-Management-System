@@ -2,22 +2,22 @@
 <?php
 if(isset($_POST['buttonAdd'])){
         $EmpID= $_POST['Emp_ID'];
-        $Date= $_POST['Date'];
-        $CheckIN= $_POST['Check_IN'];
-        $CheckOUT= $_POST['Check_OUT'];
+        $Type= $_POST['Type'];
+        $Reason= $_POST['Reason'];
+        $DateTimeFrom= $_POST['DateTimeFrom'];
+        $DateTimeTo= $_POST['DateTimeTo'];
         
 
-        $sql="INSERT into attendance (Emp_ID,Date,Check_IN,Check_OUT)
-        values('$EmpID','$Date','$CheckIN','$CheckOUT')";
+        $sql="INSERT into work_leave (Emp_ID,Type,Reason,DateTimeFrom,DateTimeTo)
+        values('$EmpID','$Type','$Reason','$DateTimeFrom','$DateTimeTo')";
         $result=mysqli_query($conn,$sql);
         if(!$result){
             die("query failed".mysqli_error($conn));
         }else{
-          header('location:Attendance.php?insert_msg=Attendance has been submitted!');
+          header('location:LeaveForm.php?insert_msg=Leave request has been submitted!');
         }
       }
         ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -25,7 +25,7 @@ if(isset($_POST['buttonAdd'])){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Attendance</title>
+    <title>Employee Leave Form</title>
     <link rel="stylesheet" href="EMDashboard.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
@@ -33,24 +33,30 @@ if(isset($_POST['buttonAdd'])){
 <body>
     <div class="well">
         <div class="text">
-        <h1>Attendance</h1>
+        <h1>Leave Form</h1>
       </div>
       </div>
       
         <div class="regform">
-      <form class="form1" action="Attendance.php" Method="post">
+      <form class="form1" action="LeaveForm.php" Method="post">
   
         <label>Employee ID</label>
         <input id="EmpID" name="Emp_ID" type="text">
   
-        <label>Date</label>
-        <input id="Date" name="Date" type="date">
+        <label>Type</label>
+        <Select name="Type" id="Type">
+        <option value="Casual">Casual</option>
+        <option value="Extended">Extended</option>
+        </Select>
+
+        <label>Reason</label>
+        <textarea id="Reason" name="Reason" rows="5" cols="50"></textarea>
   
-        <label>Check In</label>
-        <input id="CheckIN" name="Check_IN" type="time">
+        <label>Date/Time From</label>
+        <input id="DateTimeFrom" name="DateTimeFrom" type="date">
   
-        <label>Check Out</label>
-        <input id="CheckOUT" name="Check_OUT" type="time">
+        <label>Date/Time To</label>
+        <input id="DateTimeTo" name="DateTimeTo" type="date">
   
         <div class="text">
         <button id="buttonAdd"  name="buttonAdd" type="submit" value="UPDATE">Submit</button>

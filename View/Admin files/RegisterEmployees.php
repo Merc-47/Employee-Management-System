@@ -7,8 +7,9 @@
     <title>Admin Employee Registration</title>
     
     
-    <link rel="stylesheet" href="Dashboard.css">
+    
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="Dashboard.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -65,6 +66,27 @@
         ?>
     </table> <br><br><br>
     <center>
+      <?php
+      if(isset($_POST['buttonAdd'])){
+    $EmployeeID= $_POST['Employee_ID'];
+        $FName= $_POST['FName'];
+        $LName= $_POST['LName'];
+        $Email= $_POST['Email'];
+        $DepID= $_POST['Dep_ID'];
+        $Title= $_POST['Title'];
+        $UserName= $_POST['UserName'];
+        $Password= $_POST['Password'];
+
+        $sql="INSERT into registration (Employee_ID,FName,LName,Email,Dep_ID,Title,UserName,Password)
+        values('$EmployeeID','$FName','$LName','$Email','$DepID','$Title','$UserName','$Password')";
+        $result=mysqli_query($conn,$sql);
+        if(!$result){
+            die("query failed".mysqli_error($conn));
+        }else{
+          header('location:RegisterEmployees.php?insert_msg=Data has been successfully Inserted!');
+        }
+      }
+        ?>
 <?php 
 if(isset($_GET['update_msg'])){
 echo"<h4>".$_GET['update_msg']."</h4>";
@@ -72,6 +94,7 @@ echo"<h4>".$_GET['update_msg']."</h4>";
 if(isset($_GET['delete_msg'])){
     echo"<h4>".$_GET['delete_msg']."</h4>";
     }
+   
 ?>
     </center>
     <div class="text">
@@ -80,7 +103,7 @@ if(isset($_GET['delete_msg'])){
 
       <div class="flex">
         <div class="regform">
-      <form class="form1" action="RegInsertEMP.php" method="post" >
+      <form class="form1" action="RegisterEmployees.php" method="post" >
   
         <label>Employee ID</label>
         <input id="EmpID" name="Employee_ID" type="text">
@@ -106,7 +129,7 @@ if(isset($_GET['delete_msg'])){
         <label>Password</label>
         <input id="Password" name="Password" type="text">
         <div class="text">
-        <button>Submit</button>
+        <button id="buttonAdd"  name="buttonAdd" type="submit" value="UPDATE">Insert</button>
       </div>
       </form>
     </div>
@@ -115,7 +138,13 @@ if(isset($_GET['delete_msg'])){
         <br><a href="EmployeeDetails.php"><button>Employee details</button></a>
       </div>
     </div>
-      
+    <center>
+      <?php
+       if(isset($_GET['insert_msg'])){
+        echo"<h4>".$_GET['insert_msg']."</h4>";
+        }
+      ?>
+      </center>
 </body>
     
 </html>
