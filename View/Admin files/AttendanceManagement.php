@@ -25,28 +25,44 @@
           <th>Update</th>
           <th>Delete</th>
         </tr>
+        <?php include('dbConnection.php');?>
         <?php
-       $conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
+       $sql="SELECT * FROM attendance";
+       
+       $result=mysqli_query($conn,$sql);
+       if(!$result){
+           die("retreiving failed".mysqli_error($conn));
        }
-        $sql="SELECT Attendance_ID,Emp_ID,Date,Check_IN,Check_OUT FROM attendance";
-        $result=$conn->query($sql); 
-        if($result-> num_rows > 0){
-            while($rows=$result->fetch_assoc()){
-                echo"<tr><td>".$rows["Attendance_ID"]."</td><td>".$rows["Emp_ID"]."</td><td>".$rows["Date"]
-                ."</td><td>".$rows["Check_IN"]."</td><td>".$rows["Check_OUT"]."</td></tr>";
-            }
-            echo"</table>";
-        }
-        else{
-             echo"0 reult";
-        }
-        $conn->close();
+
+       else{
+           while($row=mysqli_fetch_assoc($result)){
+                 ?>
+           <tr>
+                 <td><?php echo $row['Attendance_ID'];?></td>
+                 <td><?php echo $row['Emp_ID'];?></td>
+                 <td><?php echo $row['Date'];?></td>
+                 <td><?php echo $row['Check_IN'];?></td>
+                 <td><?php echo $row['Check_OUT'];?></td>
+                 <td><a href="AttendanceUpdate.php?Attendance_ID=<?php echo $row['Attendance_ID'];?>">Update</a></td>
+                 <td><a href="AttendanceDelete.php?Attendance_ID=<?php echo $row['Attendance_ID'];?>" >Delete</a></td>
+                
+           </tr>
+           <?php
+           }
+     }
         ?>
               </table><br>
-              <div class="text">
-              <button>Insert</button>
-            </div>
+              <center>
+<?php 
+if(isset($_GET['update_msg'])){
+echo"<h4>".$_GET['update_msg']."</h4>";
+}
+if(isset($_GET['delete_msg'])){
+    echo"<h4>".$_GET['delete_msg']."</h4>";
+    }
+   
+?>
+    </center>
+              
 </body>
 </html>

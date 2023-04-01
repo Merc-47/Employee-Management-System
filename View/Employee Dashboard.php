@@ -272,14 +272,7 @@
         </div>
       </div>
     </section>
-    <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Logout</h1>
-        </div>
-        </div></div>
-    </section>
+    
     <section>
       <div class="col-sm-9">
         <div class="well">

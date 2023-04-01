@@ -18,12 +18,13 @@ table {
   }
   .width{
     width:275px;
-    background-color:#cee4f1;
+    background-color:#337ab7;
     text-align: center;
     border:1px solid white;
   }
   .well{
-    background-color:#289de0 ;
+    background-color:#337ab7;
+    color: whitesmoke;
   
   }
  

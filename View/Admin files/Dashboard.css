@@ -23,7 +23,8 @@ table {
     border:1px solid white;
   }
   .well{
-    background-color:#289de0 ;
+    background-color:#337ab7 ;
+    color: whitesmoke;
   
   }
   body{
@@ -71,6 +72,17 @@ table {
   }
   
   input {
+    width: 100%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+  }
+  select{
+    float:right;
+    width: 64%;
+    padding: 0.7em;
+    margin-bottom: 0.5rem;
+  }
+  textarea{
     width: 100%;
     padding: 0.7em;
     margin-bottom: 0.5rem;
@@ -132,3 +144,13 @@ table {
     width: 800px;
     min-height: 400px;
   }
+  .pushdown{
+    
+    padding-top: 80px;
+    
+   
+  }
+ .left{
+  float:left;
+ }
+ 

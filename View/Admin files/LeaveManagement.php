@@ -26,28 +26,45 @@
           <th>Update</th>
           <th>Delete</th>
         </tr>
+        <?php include('dbConnection.php');?>
         <?php
-       $conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
+       $sql="SELECT * FROM work_leave";
+       
+       $result=mysqli_query($conn,$sql);
+       if(!$result){
+           die("retreiving failed".mysqli_error($conn));
        }
-        $sql="SELECT Leave_ID,Emp_ID,Type, Reason, DateTimeFrom, DateTimeTo FROM work_leave";
-        $result=$conn->query($sql); 
-        if($result-> num_rows > 0){
-            while($rows=$result->fetch_assoc()){
-                echo"<tr><td>".$rows["Leave_ID"]."</td><td>".$rows["Emp_ID"]."</td><td>".$rows["Type"]
-                ."</td><td>".$rows["Reason"]."</td><td>".$rows["DateTimeFrom"]."</td><td>".$rows["DateTimeTo"]."</td></tr>";
-            }
-            echo"</table>";
-        }
-        else{
-             echo"0 reult";
-        }
-        $conn->close();
+
+       else{
+           while($row=mysqli_fetch_assoc($result)){
+                 ?>
+           <tr>
+                 <td><?php echo $row['Leave_ID'];?></td>
+                 <td><?php echo $row['Emp_ID'];?></td>
+                 <td><?php echo $row['Type'];?></td>
+                 <td><?php echo $row['Reason'];?></td>
+                 <td><?php echo $row['DateTimeFrom'];?></td>
+                 <td><?php echo $row['DateTimeTo'];?></td>
+                 <td><a href="LeaveUpdate.php?Leave_ID=<?php echo $row['Leave_ID'];?>">Update</a></td>
+                 <td><a href="LeaveDelete.php?Leave_ID=<?php echo $row['Leave_ID'];?>" >Delete</a></td>
+                
+           </tr>
+           <?php
+           }
+     }
         ?>
+       
               </table><br>
-              <div class="text">
-              <button>Insert</button>
-            </div>
+              <center>
+      <?php
+       if(isset($_GET['delete_msg'])){
+        echo"<h4>".$_GET['delete_msg']."</h4>";
+        }
+        if(isset($_GET['update_msg'])){
+            echo"<h4>".$_GET['update_msg']."</h4>";
+            }
+      ?>
+      </center> <br><br><br>
+             
 </body>
 </html>

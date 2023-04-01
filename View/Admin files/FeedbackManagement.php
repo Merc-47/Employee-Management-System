@@ -17,35 +17,50 @@
       
       <table>
           <tr>
-          <th>FeedBack_ID</th>
-          <th>Emp_ID</th>
+          <th>FeedBack ID</th>
+          <th>Emp ID</th>
           <th>Feedback</th>
           <th>Date/Time</th>
           <th>Update</th>
           <th>Delete</th>
         </tr>
+        <?php include('dbConnection.php');?>
         <?php
-       $conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
+       $sql="SELECT * FROM feedback";
+       
+       $result=mysqli_query($conn,$sql);
+       if(!$result){
+           die("retreiving failed".mysqli_error($conn));
        }
-        $sql="SELECT FeedBack_ID,Emp_ID,Feedback,DateTime FROM feedback";
-        $result=$conn->query($sql); 
-        if($result-> num_rows > 0){
-            while($rows=$result->fetch_assoc()){
-                echo"<tr><td>".$rows["FeedBack_ID"]."</td><td>".$rows["Emp_ID"]."</td><td>".$rows["Feedback"]
-                ."</td><td>".$rows["DateTime"]."</td></tr>";
-            }
-            echo"</table>";
-        }
-        else{
-             echo"0 reult";
-        }
-        $conn->close();
+
+       else{
+           while($row=mysqli_fetch_assoc($result)){
+                 ?>
+           <tr>
+                 <td><?php echo $row['FeedBack_ID'];?></td>
+                 <td><?php echo $row['Emp_ID'];?></td>
+                 <td><?php echo $row['Feedback'];?></td>
+                 <td><?php echo $row['DateTime'];?></td>
+                 <td><a href="FeedbackUpdate.php?FeedBack_ID=<?php echo $row['FeedBack_ID'];?>">Update</a></td>
+                 <td><a href="FeedbackDelete.php?FeedBack_ID=<?php echo $row['FeedBack_ID'];?>" >Delete</a></td>
+                
+           </tr>
+           <?php
+           }
+     }
         ?>
               </table><br>
-              <div class="text">
-              <button>Insert</button>
-            </div>
+              <center>
+<?php 
+if(isset($_GET['update_msg'])){
+echo"<h4>".$_GET['update_msg']."</h4>";
+}
+if(isset($_GET['delete_msg'])){
+    echo"<h4>".$_GET['delete_msg']."</h4>";
+    }
+   
+?>
+    </center>
+              
 </body>
 </html>
