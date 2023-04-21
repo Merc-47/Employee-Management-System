@@ -39,6 +39,8 @@ if(isset($_POST['buttonAdd'])){
       </div>
       </div>
       
+      <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a>
+      <br><br>
       <table>
       <tr>
           <th>Payroll_ID</th>
@@ -74,8 +76,8 @@ if(isset($_POST['buttonAdd'])){
                   <td><?php echo $row['Taxes'];?></td>
                   <td><?php echo $row['WorkHours'];?></td>
                   <td><?php echo $row['Salary'];?></td>
-                  <td><a href="PayrollUpdate.php?Payroll_ID=<?php echo $row['Payroll_ID'];?>">Update</a></td>
-                  <td><a href="PayrollDelete.php?Payroll_ID=<?php echo $row['Payroll_ID'];?>" >Delete</a></td>
+                  <td><a class="btn btn-primary" role="button" href="PayrollUpdate.php?Payroll_ID=<?php echo $row['Payroll_ID'];?>">Update</a></td>
+                  <td><a class="btn btn-danger" role="button" href="PayrollDelete.php?Payroll_ID=<?php echo $row['Payroll_ID'];?>" >Delete</a></td>
                  
             </tr>
             <?php

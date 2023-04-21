@@ -39,7 +39,7 @@
                     <p class="mb-0 me-2"></p>
                     <nav>
                       <ul class="nav nav-pills nav-stacked">
-                    <li data-rel="6"><button type="button" class="btn btn-primary">Edit</button></li>
+                    <li data-rel="5"><button type="button" class="btn btn-primary">Edit</button></li>
                     </ul></nav>
                   </div>
                 </div>  
@@ -152,17 +152,7 @@
             </div>
           </div></div>
 
-          <div class="padding">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h3>Cafeteria</h3> 
-              </div>
-              <div class="flip-card-back">
-                <a href="Admin files/Cafeteria.php"><img src="Images/cafeteria.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
-              </div>
-            </div>
-          </div></div>
+          
         </div>
 
       </div>

@@ -3,14 +3,15 @@
 <?php
       if(isset($_POST['buttonAdd'])){
         $EmpID= $_POST['Emp_ID'];
+        $UserName= $_POST['UserName'];
         $CurrentTeam= $_POST['CurrentTeam'];
         $SAssinments= $_POST['S_Assinments'];
         $TAssinments= $_POST['T_Assinments'];
         $SFeedback= $_POST['S_Feedback'];
         
 
-        $sql="INSERT into progress (Emp_ID,CurrentTeam,S_Assinments,T_Assinments,S_Feedback)
-        values('$EmpID','$CurrentTeam','$SAssinments',' $TAssinments','$SFeedback')";
+        $sql="INSERT into progress (Emp_ID,UserName,CurrentTeam,S_Assinments,T_Assinments,S_Feedback)
+        values('$EmpID','$UserName','$CurrentTeam','$SAssinments',' $TAssinments','$SFeedback')";
         $result=mysqli_query($conn,$sql);
         if(!$result){
             die("query failed".mysqli_error($conn));
@@ -36,7 +37,8 @@
         <h1>Employee Progress</h1>
       </div>
       </div>
-   
+      <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a>
+      <br><br>
     <div class="flex">
     <div class="paddingchart">
         <div class="chartbg"><canvas id="myChartLineOne" style="width:150px;height: 100px;"></canvas></div>
@@ -47,6 +49,9 @@
             <form class="form1" action="EmployeeProgress.php" method="post">
               <label>Employee ID</label>
               <input id="EmpID" name="Emp_ID" type="text">
+
+              <label >User Name</label>
+              <input id="UserName" name="UserName" type="text">
 
               <label >Current Assined Team</label>
               <input id="CurrentTeam" name="CurrentTeam" type="text">

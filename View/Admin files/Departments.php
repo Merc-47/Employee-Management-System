@@ -1,3 +1,4 @@
+<?php include('dbConnection.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,6 +17,53 @@
     </div>
     </div>
     
+    <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a>
+    <br>
+      <form class="form-inline" method="post">
+<label>Enter Department ID</label>
+<div class="form-group">
+<input type="text" class="form-control" name="search">
+</div>
+<div class="form-group">
+<input type="submit" class="form-control" name="submit" style="background-color:#337ab7; color:whitesmoke;">
+</div>
+</form>
+<br>
+<?php
+ if (isset($_POST["submit"])) {
+            $ID = $_POST["search"];
+$sql="SELECT * FROM department WHERE Dep_ID = '$ID'";
+        $result=mysqli_query($conn,$sql);
+        if($row=mysqli_fetch_assoc($result)){
+                  ?>
+                  <table>
+    <tr>
+    <th>Department_ID</th>
+          <th>Department Name</th>
+          <th>Managers</th>
+          <th>Employees</th>
+          <th>Update</th>
+          <th>Delete</th>
+          </tr>
+          
+         
+            <tr>
+                <td><?php echo $row['Dep_ID'];?></td>
+                 <td><?php echo $row['DName'];?></td>
+                 <td><?php echo $row['Managers'];?></td>
+                 <td><?php echo $row['Employees'];?></td>
+                 <td><a class="btn btn-primary" role="button" href="DepUpdate.php?Dep_ID=<?php echo $row['Dep_ID'];?>">Update</a></td>
+                 <td><a class="btn btn-danger" role="button" href="DepDelete.php?Dep_ID=<?php echo $row['Dep_ID'];?>" >Delete</a></td>
+            </tr></table>`
+            <br>
+            
+            <?php
+            }
+            else{
+                echo "<center><h4>Department Does not exist</h4></center>";
+            }
+        }
+        ?>
     <table>
     <tr>
           <th>Department_ID</th>
@@ -42,8 +90,8 @@
                  <td><?php echo $row['DName'];?></td>
                  <td><?php echo $row['Managers'];?></td>
                  <td><?php echo $row['Employees'];?></td>
-                 <td><a href="DepUpdate.php?Dep_ID=<?php echo $row['Dep_ID'];?>">Update</a></td>
-                 <td><a href="DepDelete.php?Dep_ID=<?php echo $row['Dep_ID'];?>" >Delete</a></td>
+                 <td><a class="btn btn-primary" role="button" href="DepUpdate.php?Dep_ID=<?php echo $row['Dep_ID'];?>">Update</a></td>
+                 <td><a class="btn btn-danger" role="button" href="DepDelete.php?Dep_ID=<?php echo $row['Dep_ID'];?>" >Delete</a></td>
            </tr>
            <?php
            }

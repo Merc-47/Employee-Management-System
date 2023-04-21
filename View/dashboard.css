@@ -6,6 +6,7 @@ body{
   .text{
       text-align: center;
       justify-content: center;
+      font-family: 'Times New Roman', Times, serif;
   }
   
       .row.content {height: 550px}
@@ -89,7 +90,7 @@ body{
         border: 1px solid black;
         justify-content: center;
         width:420px;
-        height:320px;
+        height:300px;
       }
       .padding{
         padding: 20px;

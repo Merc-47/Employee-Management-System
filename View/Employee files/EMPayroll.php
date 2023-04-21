@@ -15,6 +15,8 @@
       </div>
       </div>
       
+      <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/Employee%20Dashboard.php">Dashboard</a>
+      <br><br>
       <table>
       <tr>
           <th>Payroll_ID</th>

@@ -23,7 +23,7 @@
     border: 0;
   }
   form button:hover {
-    background: gold;
+    background: #337ab7;
   }
   
   label {
@@ -49,7 +49,7 @@
     margin-bottom: 0.5rem;
   }
   input:focus {
-    outline: 3px solid gold;
+    outline: 3px solid #337ab7;
   }
   
   @media (min-width: 400px) {

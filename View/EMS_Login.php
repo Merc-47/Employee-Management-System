@@ -14,6 +14,7 @@
  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"rel="stylesheet"/>
 <!-- MDB -->
 <script type="text/javascript"src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>  
+<link rel="stylesheet" href="Admin files/Dashboard.css">
 <style>
  .adjust{
   padding-top: 50px;
@@ -37,7 +38,7 @@
 
 <div class="adjust">
   
-    <img src="images/department.jfif"
+    <img src="images/profile.png"
        height="170px">
       </div>
        
@@ -51,12 +52,14 @@
     session_start();
     
     if (isset($_POST['UserName'])) {
+        $AdminID = stripslashes($_REQUEST['Admin_ID']);   
+        $AdminID  = mysqli_real_escape_string($conn,  $AdminID );
         $UserName = stripslashes($_REQUEST['UserName']);   
         $UserName  = mysqli_real_escape_string($conn,  $UserName );
         $Password = stripslashes($_REQUEST['Password']);
         $Password = mysqli_real_escape_string($conn, $Password);
         
-        $query    = "SELECT * FROM admin where UserName='".$UserName."' AND Password='".$Password."'";
+        $query    = "SELECT * FROM admin where Admin_ID='".$AdminID."'AND UserName='".$UserName."' AND Password='".$Password."'";
         $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
         $rows = mysqli_num_rows($result);
         if ($rows == 1) {
@@ -65,25 +68,26 @@
             header("Location: http://localhost/EMS/View/AdminDashboard.php");
         } else {
             echo "<div class='form'>
-                  <h3>Incorrect Username or password.</h3><br/>
-                  <p class='link'>Click here to <a href='Admin_Login.php'>Login</a> again.</p>
+                  <h3>Incorrect ID,Username or password.</h3><br/>
+                  <p class='link'>Click here to <a href='EMS_Login.php'>Login</a> again.</p>
                   </div>";
         }
     } else {
 ?>
 
-    <form  method="POST" name="login">
-      <div class="form-outline mb-4">
-        <input type="text" name="UserName" id="loginName" class="form-control" style="background-color:rgba(0, 102, 255, 0.733);"/>
-        <label class="form-label" for="loginName">Username</label>
+    <form class="form1"  method="POST" name="login">
+     
+    <label >Admin ID</label>
+        <input type="text" name="Admin_ID" id="loginID" style="background-color:#337ab7;color:white"/>
+    <label >Username</label>
+        <input type="text" name="UserName" id="loginName" style="background-color:#337ab7;color:white"/>
+        
+    <label >Password</label>
+        <input type="password" name="Password" id="loginPassword" style="background-color:#337ab7;color:white" />
+    
+      <div class="text">
+      <button type="submit" class="btn btn-primary "value="Login" name="submit" >Log in</button>
       </div>
-
-      <div class="form-outline mb-4">
-        <input type="password" name="Password" id="loginPassword" class="form-control" style="background-color:rgba(0, 102, 255, 0.733);" />
-        <label class="form-label" for="loginPassword">Password</label>
-      </div>
-      
-      <button type="submit" class="btn btn-primary btn-block mb-4"value="Login" name="submit" >Log in</button>
       </form>
       <?php
     }
@@ -96,18 +100,20 @@
     
     
     if (isset($_POST['UserName'])) {
+      $EmpID = stripslashes($_REQUEST['Employee_ID']);   
+        $EmpID  = mysqli_real_escape_string($conn,  $EmpID );
         $UserName = stripslashes($_REQUEST['UserName']);   
         $UserName  = mysqli_real_escape_string($conn,  $UserName );
         $Password = stripslashes($_REQUEST['Password']);
         $Password = mysqli_real_escape_string($conn, $Password);
         
-        $query    = "SELECT * FROM registration where UserName='".$UserName."' AND Password='".$Password."'";
+        $query    = "SELECT * FROM registration Where Employee_ID='".$EmpID."'AND UserName='".$UserName."' AND Password='".$Password."'";
         $result = mysqli_query($conn, $query) or die(mysqli_error($conn));
         $rows = mysqli_num_rows($result);
         if ($rows == 1) {
             $_SESSION['UserName'] =  $UserName ;
-           
             header("Location: http://localhost/EMS/View/Employee%20Dashboard.php");
+           
         } else {
             echo "<div class='form'>
                   <h3>Incorrect Username or password.</h3><br/>
@@ -116,18 +122,19 @@
         }
     } else {
 ?>
-    <form method="POST" name="login">
-     <div class="form-outline mb-4" >
-      <input type="type" name="UserName" id="loginName" class="form-control" style="background-color:rgba(0, 102, 255, 0.733);" />
-      <label class="form-label" for="loginName" > User Name</label>
-    </div>
-
-    <div class="form-outline mb-4">
-      <input type="password" name="Password" id="loginPassword" class="form-control" style="background-color:rgba(0, 102, 255, 0.733);" />
-      <label class="form-label" for="loginPassword">Password</label>
-    </div>
+    <form class="form1" method="POST"  name="login">
+     
+    <label >Employee ID</label>
+        <input type="text" name="Employee_ID" id="loginID" style="background-color:#337ab7;color:white"/>
+     <label> User Name</label>
+      <input type="type" name="UserName" id="loginName"  style="background-color:#337ab7;color:white"/>
       
-      <button type="submit" class="btn btn-primary btn-block mb-3"value="Login" name="submit" >Log in</button>
+    <label  >Password</label>
+      <input type="password" name="Password" id="loginPassword"  style="background-color:#337ab7;color:white;" />
+   
+      <div class="text">
+      <button type="submit" class="btn btn-primary "value="Login" name="submit" >Log in</button>
+    </div>
     </form>
   </div>
 </div>

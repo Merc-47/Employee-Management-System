@@ -51,7 +51,7 @@ if(!$result){
 <body>
     <div class="well">
         <div class="text">
-        <h1>Leave Form</h1>
+        <h1>Update Leave</h1>
       </div>
       </div>
       

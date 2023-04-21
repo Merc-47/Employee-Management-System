@@ -32,7 +32,7 @@ table {
   .text{
       text-align: center;
       justify-content: center;
-    
+      font-family: 'Times New Roman', Times, serif;
   }
   * {
     box-sizing: border-box;
@@ -59,7 +59,7 @@ table {
     border: 0;
   }
   form button:hover {
-    background: gold;
+    background: #337ab7;
   }
   
   label {
@@ -85,7 +85,7 @@ table {
     margin-bottom: 0.5rem;
   }
   input:focus {
-    outline: 3px solid gold;
+    outline: 3px solid #337ab7;
   }
   
   @media (min-width: 400px) {

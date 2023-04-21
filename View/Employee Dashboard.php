@@ -39,7 +39,7 @@
                     <p class="mb-0 me-2"></p>
                     <nav>
                       <ul class="nav nav-pills nav-stacked">
-                    <li data-rel="6"><button type="button" class="btn btn-primary">Edit</button></li>
+                    <li data-rel="5"><button type="button" class="btn btn-primary">Edit</button></li>
                     </ul></nav>
                   </div>
                 </div>  
@@ -114,17 +114,7 @@
             </div>
           </div></div>
 
-          <div class="padding">
-          <div class="flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <h3>Cafeteria</h3> 
-              </div>
-              <div class="flip-card-back">
-                <a href="Employee files/EMCafeteria.php"> <img src="Images/cafeteria.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
-              </div>
-            </div>
-          </div></div>
+          
 
           <div class="padding">
           <div class="flip-card">
@@ -152,45 +142,51 @@
       <div class="paddingchart">
       <div class="chartbg"><canvas id="myChartPie" style="width:150px;height:100px;" ></canvas></div>
     </div>
-      <div class="paddingchart">
-      <div class="chartbg"><canvas id="myChartLine" style="width:150px;height: 100px;"></canvas></div>
-    </div>
-    </div>
-    <table>
-      <tr>
+ 
+   </div>
+      <?php include('Admin files/dbConnection.php');?>
+      
+<?php
+
+$UserName= $_SESSION['UserName'];
+$sql="SELECT * FROM progress WHERE UserName = '$UserName'";
+        $result=mysqli_query($conn,$sql);
+        if($row=mysqli_fetch_assoc($result)){
+                  ?>
+                  <table>
+    <tr>
         <th>Employee ID</th>
+        <th>User Name</th>
         <th>Current Assined Team</th>
         <th>Successful Assinments</th>
         <th>Total Assinments</th>
-      </tr>
-      <?php include('Admin files/dbConnection.php');?>
-      <?php
-       $sql="SELECT * FROM progress";
-      
-       $result=mysqli_query($conn,$sql);
-       if(!$result){
-           die("query failed".mysqli_error($conn));
-       }
-
-       else{
-           while($row=mysqli_fetch_assoc($result)){
-                 ?>
-           <tr>
+          </tr>
+          
+         
+            <tr>
                  <td><?php echo $row['Emp_ID'];?></td>
+                 <td><?php echo $row['UserName'];?></td>
                  <td><?php echo $row['CurrentTeam'];?></td>
                  <td><?php echo $row['S_Assinments'];?></td>
                  <td><?php echo $row['T_Assinments'];?></td>
-           </tr>
-    </table>
-           <br>
+                  
+            </tr></table>`
+            <br>
       <table>
       <tr><th>Supervisor feedback</th>
         <td><?php echo $row['S_Feedback'];?></td></tr>
     </table>
-    <?php
-           }
-     }
-       ?>
+            
+            <?php
+            }
+            else{
+                echo "<center><h4>Employee ID is incorrect</h4></center>";
+            }
+        
+      
+ 
+        ?>
+      
     </div>
       
     </section>

@@ -15,6 +15,8 @@
       </div>
       </div>
       
+      <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a>
+      <br><br>
       <table>
           <tr>
           <th>FeedBack ID</th>
@@ -41,8 +43,8 @@
                  <td><?php echo $row['Emp_ID'];?></td>
                  <td><?php echo $row['Feedback'];?></td>
                  <td><?php echo $row['DateTime'];?></td>
-                 <td><a href="FeedbackUpdate.php?FeedBack_ID=<?php echo $row['FeedBack_ID'];?>">Update</a></td>
-                 <td><a href="FeedbackDelete.php?FeedBack_ID=<?php echo $row['FeedBack_ID'];?>" >Delete</a></td>
+                 <td><a class="btn btn-primary" role="button" href="FeedbackUpdate.php?FeedBack_ID=<?php echo $row['FeedBack_ID'];?>">Update</a></td>
+                 <td><a class="btn btn-danger" role="button" href="FeedbackDelete.php?FeedBack_ID=<?php echo $row['FeedBack_ID'];?>" >Delete</a></td>
                 
            </tr>
            <?php

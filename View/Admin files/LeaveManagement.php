@@ -15,6 +15,8 @@
       </div>
       </div>
       
+      <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a>
+      <br><br>
       <table>
       <tr>
           <th>Leave_ID</th>
@@ -45,8 +47,8 @@
                  <td><?php echo $row['Reason'];?></td>
                  <td><?php echo $row['DateTimeFrom'];?></td>
                  <td><?php echo $row['DateTimeTo'];?></td>
-                 <td><a href="LeaveUpdate.php?Leave_ID=<?php echo $row['Leave_ID'];?>">Update</a></td>
-                 <td><a href="LeaveDelete.php?Leave_ID=<?php echo $row['Leave_ID'];?>" >Delete</a></td>
+                 <td><a class="btn btn-primary" role="button" href="LeaveUpdate.php?Leave_ID=<?php echo $row['Leave_ID'];?>">Update</a></td>
+                 <td><a class="btn btn-danger" role="button" href="LeaveDelete.php?Leave_ID=<?php echo $row['Leave_ID'];?>" >Delete</a></td>
                 
            </tr>
            <?php

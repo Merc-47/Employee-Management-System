@@ -33,6 +33,8 @@ if(isset($_POST['buttonAdd'])){
         <h1>FeedBack Form</h1>
       </div>
       </div>
+      <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/Employee%20Dashboard.php">Dashboard</a>
+      <br><br>
       
         <div class="regform">
       <form class="form1" action="FeedBackForm.php" method="post">

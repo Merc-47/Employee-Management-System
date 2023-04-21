@@ -1,3 +1,4 @@
+<?php include('dbConnection.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,7 +19,66 @@
         <h1>Employee Registration</h1>
       </div>
       </div>
-
+      <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a>
+      <br>
+      <form class="form-inline" method="post">
+<label>Enter Employee ID</label>
+<div class="form-group">
+<input type="text" class="form-control" name="search">
+</div>
+<div class="form-group">
+<input type="submit" class="form-control" name="submit" style="background-color:#337ab7; color:whitesmoke;">
+</div>
+</form>
+<br>
+<?php
+ if (isset($_POST["submit"])) {
+            $ID = $_POST["search"];
+$sql="SELECT * FROM registration WHERE Employee_ID = '$ID'";
+        $result=mysqli_query($conn,$sql);
+        if($row=mysqli_fetch_assoc($result)){
+                  ?>
+                  <table>
+    <tr>
+            <th>Reg ID</th>
+            <th>Employee ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Department ID</th>
+            <th>Title</th>
+            <th>User Name</th>
+            <th>Password</th>
+            <th>Update</th>
+            <th>Delete</th>
+          </tr>
+          
+         
+            <tr>
+            <td><?php echo $row['Reg_ID'];?></td>
+                  <td><?php echo $row['Employee_ID'];?></td>
+                  <td><?php echo $row['FName'];?></td>
+                  <td><?php echo $row['LName'];?></td>
+                  <td><?php echo $row['Email'];?></td>
+                  <td><?php echo $row['Dep_ID'];?></td>
+                  <td><?php echo $row['Title'];?></td>
+                  <td><?php echo $row['UserName'];?></td>
+                  <td><?php echo $row['Password'];?></td>
+                  <td><a class="btn btn-primary" role="button" href="RegUpdateEMP.php?Reg_ID=<?php echo $row['Reg_ID'];?>">Update</a></td>
+                  <td><a class="btn btn-danger" role="button" href="RegDeleteEMP.php?Reg_ID=<?php echo $row['Reg_ID'];?>" >Delete</a></td>
+                 
+            </tr></table>`
+            <br>
+            
+            <?php
+            }
+            else{
+                echo "<center><h4>Employee Does not exist</h4></center>";
+            }
+        }
+        ?>
+        
+        <br>
       <table>
         <tr>
             <th>Reg ID</th>
@@ -33,7 +93,7 @@
             <th>Update</th>
             <th>Delete</th>
         </tr>
-        <?php include('dbConnection.php');?>
+       
         <?php 
         $sql="SELECT * FROM registration";
        
@@ -55,8 +115,8 @@
                   <td><?php echo $row['Title'];?></td>
                   <td><?php echo $row['UserName'];?></td>
                   <td><?php echo $row['Password'];?></td>
-                  <td><a href="RegUpdateEMP.php?Reg_ID=<?php echo $row['Reg_ID'];?>">Update</a></td>
-                  <td><a href="RegDeleteEMP.php?Reg_ID=<?php echo $row['Reg_ID'];?>" >Delete</a></td>
+                  <td><a class="btn btn-primary" role="button" href="RegUpdateEMP.php?Reg_ID=<?php echo $row['Reg_ID'];?>">Update</a></td>
+                  <td><a class="btn btn-danger" role="button" href="RegDeleteEMP.php?Reg_ID=<?php echo $row['Reg_ID'];?>" >Delete</a></td>
                  
             </tr>
             <?php
@@ -64,29 +124,9 @@
       }
      
         ?>
-    </table> <br><br><br>
+    </table> <br><br>
     <center>
-      <?php
-      if(isset($_POST['buttonAdd'])){
-    $EmployeeID= $_POST['Employee_ID'];
-        $FName= $_POST['FName'];
-        $LName= $_POST['LName'];
-        $Email= $_POST['Email'];
-        $DepID= $_POST['Dep_ID'];
-        $Title= $_POST['Title'];
-        $UserName= $_POST['UserName'];
-        $Password= $_POST['Password'];
-
-        $sql="INSERT into registration (Employee_ID,FName,LName,Email,Dep_ID,Title,UserName,Password)
-        values('$EmployeeID','$FName','$LName','$Email','$DepID','$Title','$UserName','$Password')";
-        $result=mysqli_query($conn,$sql);
-        if(!$result){
-            die("query failed".mysqli_error($conn));
-        }else{
-          header('location:RegisterEmployees.php?insert_msg=Data has been successfully Inserted!');
-        }
-      }
-        ?>
+      
 <?php 
 if(isset($_GET['update_msg'])){
 echo"<h4>".$_GET['update_msg']."</h4>";
@@ -94,57 +134,25 @@ echo"<h4>".$_GET['update_msg']."</h4>";
 if(isset($_GET['delete_msg'])){
     echo"<h4>".$_GET['delete_msg']."</h4>";
     }
+    
+if(isset($_GET['insert_msg'])){
+ echo"<h4>".$_GET['insert_msg']."</h4>";
+    }
+      
    
 ?>
     </center>
     <div class="text">
-        <h1>Register Employees Profile</h1>
+    <a class="btn btn-primary" role="button"href="RegInsertEMP.php">Add new Employee Profile</a>
       </div>
 
-      <div class="flex">
-        <div class="regform">
-      <form class="form1" action="RegisterEmployees.php" method="post" >
-  
-        <label>Employee ID</label>
-        <input id="EmpID" name="Employee_ID" type="text">
-  
-        <label>First Name</label>
-        <input id="FName" name="FName" type="text">
-  
-        <label>Last Name</label>
-        <input id="LName" name="LName" type="text">
-  
-        <label>Email</label>
-        <input id="Email" name="Email" type="email">
-  
-        <label>Department ID</label>
-        <input id="DepID" name="Dep_ID" type="text">
-  
-        <label>Job Title</label>
-        <input id="Title" name="Title" type="text">
-  
-        <label >User Name</label>
-        <input id="UserName" name="UserName"  type="text">
-  
-        <label>Password</label>
-        <input id="Password" name="Password" type="text">
-        <div class="text">
-        <button id="buttonAdd"  name="buttonAdd" type="submit" value="UPDATE">Insert</button>
-      </div>
-      </form>
-    </div>
+      
 
     <div class="text">
-        <br><a href="EmployeeDetails.php"><button>Employee details</button></a>
+        <br><a class="btn btn-primary" role="button"href="EmployeeDetails.php">Employee details</a>
       </div>
     </div>
-    <center>
-      <?php
-       if(isset($_GET['insert_msg'])){
-        echo"<h4>".$_GET['insert_msg']."</h4>";
-        }
-      ?>
-      </center>
+      
 </body>
     
 </html>

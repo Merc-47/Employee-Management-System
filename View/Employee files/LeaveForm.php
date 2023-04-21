@@ -37,6 +37,8 @@ if(isset($_POST['buttonAdd'])){
       </div>
       </div>
       
+      <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/Employee%20Dashboard.php">Dashboard</a>
+      <br>
         <div class="regform">
       <form class="form1" action="LeaveForm.php" Method="post">
   
