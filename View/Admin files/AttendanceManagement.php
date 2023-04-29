@@ -34,6 +34,7 @@
 $sql="SELECT Attendance_ID,Emp_ID,Date,Check_IN,Check_OUT FROM attendance WHERE Date = '$ID'";
         $result=mysqli_query($conn,$sql);
         if($row=mysqli_fetch_assoc($result)){
+           
                   ?>
                   <table>
     <tr>
@@ -61,9 +62,9 @@ $sql="SELECT Attendance_ID,Emp_ID,Date,Check_IN,Check_OUT FROM attendance WHERE 
             <?php
             }
             else{
-                echo "<center><h4>Employee Does not exist</h4></center>";
+                echo "<center><h4>Attendnace is not marked</h4></center><br>";
             }
-        }
+ }
         ?>
       <table>
       <tr>

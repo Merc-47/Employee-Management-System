@@ -13,115 +13,169 @@
 
 </head>
 <body>
-  
+<?php include('dbConnection.php');?>
 <div class="well">
-<div class="left">
-            <button > <a href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a></button>
+              <div class="text">
+              <h1>Generate Report</h1>
             </div>
-        </div>
+            </div>
+            <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a>
+            <br><br>
+            
+           
+            <?php 
+             $sql="SELECT COUNT(*) as count FROM employee ";
+             $result=mysqli_query($conn,$sql);
+             $num_rows = mysqli_num_rows($result);
+             if(!$result){
+              die("retreiving failed".mysqli_error($conn));
+          }
+          else{
+              while($row=mysqli_fetch_assoc($result)){
+    ?>
 
-<div class="container-fluid">
-    <div class="row content">
-      <div class="col-sm-3 sidenav hidden-xs">
-        
-      <div class="col-sm-9">
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="width">
-                <div class="d-flex align-items-center mb-4">
-                <div class="d-flex flex-row align-items-center mb-2">
-                    
-                    <div class="bg">
-                    <h2>Generate Reports</h2>
-                  </div>
-                </div>
-<nav>
-        <ul class="nav nav-pills nav-stacked"><br>
-        
-          <li data-rel="1"><a href="#section1">Total Employee Progress Report</a></li><br><br>
-          <li data-rel="2"><a href="#section2">Employee Salary Report</a></li><br><br>
-          <li data-rel="3"><a href="#section3"> Employee Attendance Report</a></li><br><br>
-          <li data-rel="4"><a href="#section4">Employee Leave Report</a></li><br><br>
-          <li data-rel="5"><a href="#section5">Employee Project Report</a></li><br><br>
-          <li data-rel="6"><a href="#section6">Employee Feedback Report</a></li><br><br>
-        </ul>
-      </nav>
-      </div>
-    </div>
-    </div>
+    <form >
+      <label>Total Employee count </label>
+        <input id="TEmp" name="T_Emp" type="text" value="<?php echo $row['count'];?>">
+    
+            <!--<table class="center">
+    <tr><th>Total No of Employess</th>
+        <td><?php //echo $row['count'];?></td>
+      </tr>
+            </table> -->  
+            <?php
+         }
+             }
+                ?>
 
-          </div>
-        </div>
-        </div>
-        </div>
-  </div>
+            <?php 
+             $sql="SELECT SUM(T_Assinments) as sum FROM progress ";
+             $result=mysqli_query($conn,$sql);
+             $num_rows = mysqli_num_rows($result);
+             if(!$result){
+              die("retreiving failed".mysqli_error($conn));
+          }
+          else{
+              while($row=mysqli_fetch_assoc($result)){
+    ?>
 
-  <section >
+    
+      <label>Total Assinments</label>
+        <input id="TAsn" name="T_Asn" type="text" value="<?php echo $row['sum'];?>">
+   
+            <!--<table>
+    <tr><th>Total No of Assinments completed</th>
+        <td><?php // echo $row['sum'];?></td>
+      </tr>
+            </table>-->
+            <?php
+         }
+             }
+                ?>
+
+
+            <?php 
+             $sql="SELECT SUM(S_Assinments) as sum FROM progress ";
+             $result=mysqli_query($conn,$sql);
+             $num_rows = mysqli_num_rows($result);
+             if(!$result){
+              die("retreiving failed".mysqli_error($conn));
+          }
+          else{
+              while($row=mysqli_fetch_assoc($result)){
+    ?>
+
+
+      <label>Successful Assinments</label>
+        <input id="TSAsn" name="TS_Asn" type="text" value="<?php echo $row['sum'];?>">
+
+           <!-- <table>
+    <tr><th>Total Successfull Assinments completed</th>
+        <td><?php // echo $row['sum'];?></td>
+      </tr>
+            </table>-->
+            <?php
+         }
+             }
+                ?>
+
+  <?php 
+             $sql="SELECT COUNT(*) as count FROM attendance ";
+             $result=mysqli_query($conn,$sql);
+             $num_rows = mysqli_num_rows($result);
+             if(!$result){
+              die("retreiving failed".mysqli_error($conn));
+          }
   
-          <div class="pushdown">
-          <h1>Dashboard1</h1>
-          </div>
-  </div>
-  </div>  
-  </section>
-  <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Dashboard2</h1>
-        </div>
-        </div>
-      </div>
-  </section>
-  <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Dashboard3</h1>
-        </div>
-        </div>
-      </div>
-  </section>
-  <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Dashboard4</h1>
-        </div>
-        </div>
-      </div>
-  </section>
-  <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Dashboard5</h1>
-        </div>
-        </div>
-      </div>
-  </section>
-  <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Dashboard6</h1>
-        </div>
-        </div>
-      </div>
-  </section>
-</div>
+          else{
+              while($row=mysqli_fetch_assoc($result)){
+    ?>
 
 
+      <label>Total Attendance </label>
+        <input id="TAttend" name="T_Attend" type="text" value="<?php echo $row['count'];?>">
+ 
+               <!--<table>
+    <tr><th>Total number of Attendance</th>
+        <td><?php //echo $row['count'];?></td>
+      </tr>
+            </table>-->
+<?php
+ }
+  }
+ ?>
+
+<?php 
+             $sql="SELECT COUNT(*) as count FROM  feedback";
+             $result=mysqli_query($conn,$sql);
+             $num_rows = mysqli_num_rows($result);
+             if(!$result){
+              die("retreiving failed".mysqli_error($conn));
+          }
   
+          else{
+              while($row=mysqli_fetch_assoc($result)){
+    ?>
 
 
-<script>
-        (function($) {
-    $('nav li').click(function() {
-      $(this).addClass('active').siblings('li').removeClass('active');
-      $('section:nth-of-type('+$(this).data('rel')+')').stop().fadeIn(400, 'linear').siblings('section').stop().fadeOut(400, 'linear'); 
-    });
-  })(jQuery);
-      </script>   
+      <label>Total Feedbacks</label>
+        <input id="TFeed" name="T_Feed" type="text" value="<?php echo $row['count'];?>">
+   
+ <!--<table>
+    <tr><th>Total Feedbacks submitted</th>
+        <td><?php // echo $row['count'];?></td>
+      </tr>
+            </table>-->
+            <?php
+ }
+  }
+ ?>
+
+            <?php 
+             $sql="SELECT COUNT(*) as count FROM work_leave ";
+             $result=mysqli_query($conn,$sql);
+             $num_rows = mysqli_num_rows($result);
+             if(!$result){
+              die("retreiving failed".mysqli_error($conn));
+          }
+  
+          else{
+              while($row=mysqli_fetch_assoc($result)){
+    ?>
+
+
+      <label>Total Leave requests </label>
+        <input id="TLeave" name="T_Leave" type="text" value="<?php echo $row['count'];?>">
+    </form>
+        <!-- <table>
+    <tr><th>Total Leave Requests</th>
+        <td><?php // echo $row['count'];?></td>
+      </tr>
+            </table> -->   
+            <?php
+ }
+  }
+ ?>    
+            
 </body>
 </html>

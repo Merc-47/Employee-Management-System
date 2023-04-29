@@ -1,4 +1,7 @@
 <?php include("auth_session.php");?>
+<?php 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -180,7 +183,7 @@ $sql="SELECT * FROM progress WHERE UserName = '$UserName'";
             <?php
             }
             else{
-                echo "<center><h4>Employee ID is incorrect</h4></center>";
+                echo "<center><h4>Employee Progress Details not Available</h4></center>";
             }
         
       
@@ -274,8 +277,49 @@ $sql="SELECT * FROM progress WHERE UserName = '$UserName'";
         <div class="well">
           <div class="text">
           <h1>Profile Edit</h1>
-        </div>
         </div></div>
+       
+        <?php
+$UName= $_SESSION['UserName'];          
+$sql="SELECT Email,UserName,Password FROM registration where UserName='$UName'";
+$result=mysqli_query($conn,$sql);
+if(!$result){
+  die("retreiving failed".mysqli_error($conn));
+}
+
+else{
+  while($row=mysqli_fetch_assoc($result)){
+
+?>
+ <br><br><table>
+    <tr>
+          <th>Email</th>
+          <td><?php echo $row['Email'];?></td></tr>
+          <tr>
+          <th>UserName</th>
+          <td><?php echo $row['UserName'];?></td></tr>
+          <tr>
+          <th>Password</th>
+          <td><?php echo $row['Password'];?></td></tr>
+ </table><br><br>
+     
+                  <div class="text">
+                  <a class="btn btn-primary" role="button" href="EMProfileUpdate.php?UserName=<?php echo $row['UserName'];?> ">Update</a>
+                  </div>
+                  <br><br>
+                  
+                  <?php
+  }
+}
+?>
+
+<center>
+<?php 
+if(isset($_GET['update_msg'])){
+echo"<h4>".$_GET['update_msg']."</h4>";
+}?>
+      </center>     
+        </div>
     </section>
       </div>
       </div>

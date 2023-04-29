@@ -50,10 +50,17 @@ if(!$result){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update Employee Profiles</title>
+    <title>Update Employee Accounts</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="Dashboard.css">
 </head>
 <body>
+<div class="well">
+        <div class="text">
+        <h1>Employee Account Updation</h1>
+      </div>
+      </div>
+      <div class="regform">
       <form class="form1" action="RegUpdateEMP.php?Reg_ID=<?php echo $RegID;?>" method="post" >
       
       <label>Employee ID</label>
@@ -83,7 +90,7 @@ if(!$result){
         <button id="Update_EMP"  name="Update_EMP" type="submit" value="UPDATE">Submit</button>
       </div>
       </form>
-
+      </div>
 </body>
 </html>
         

@@ -4,7 +4,7 @@
     $PayrollID=$_GET['Payroll_ID'];
  
  
-$sql="SELECT Emp_ID,Dep_ID,Wage,Allowance,Deductions,Taxes,WorkHours,Salary FROM payroll where Payroll_ID='$PayrollID'";
+$sql="SELECT Emp_ID,UserName,Dep_ID,Wage,Allowance,Deductions,Taxes,Date,WorkHours,Salary FROM payroll where Payroll_ID='$PayrollID'";
 $result=mysqli_query($conn,$sql);
 if(!$result){
     die("query failed".mysqli_error($conn));
@@ -21,6 +21,7 @@ if(isset($_GET['Payroll_ID'])){
     $UPPayrollID=$_GET['Payroll_ID'];
 }
 $EmpID= $_POST['Emp_ID'];
+$UserName= $_POST['UserName'];
 $DepID= $_POST['Dep_ID'];
 $Wage= $_POST['Wage'];
 $Allowance= $_POST['Allowance'];
@@ -29,8 +30,8 @@ $Taxes= $_POST['Taxes'];
 $WorkHours= $_POST['WorkHours'];
 $Salary= $_POST['Salary'];
 
-$sql="UPDATE payroll SET Emp_ID='$EmpID',Dep_ID='$DepID',Wage='$Wage',Allowance='$Allowance'
-,Deductions='$Deductions',Taxes='$Taxes',WorkHours='$WorkHours',Salary='$Salary' WHERE Payroll_ID='$UPPayrollID'";
+$sql="UPDATE payroll SET Emp_ID='$EmpID', UserName='$UserName',Dep_ID='$DepID',Wage='$Wage',Allowance='$Allowance'
+,Deductions='$Deductions',Taxes='$Taxes', Date='$Date',WorkHours='$WorkHours',Salary='$Salary' WHERE Payroll_ID='$UPPayrollID'";
 $result=mysqli_query($conn,$sql);
 if(!$result){
     die("query failed".mysqli_error($conn));
@@ -59,6 +60,9 @@ if(!$result){
   
         <label>Emp ID</label>
         <input id="EmpID" name="Emp_ID" type="text" value="<?php echo $row['Emp_ID'];?>">
+
+        <label>User Name</label>
+        <input id="UserName" name="UserName" type="text" value="<?php echo $row['UserName'];?>">
   
         <label>Dep ID</label>
         <input id="DepID" name="Dep_ID" type="text" value="<?php echo $row['Dep_ID'];?>">
@@ -74,6 +78,9 @@ if(!$result){
 
         <label>Taxes</label>
         <input id="Taxes" name="Taxes" type="text" value="<?php echo $row['Taxes'];?>">
+
+        <label>Date</label>
+        <input id="Date" name="Date" type="Date" value="<?php echo $row['Date'];?>">
   
         <label>Work Hours</label>
         <input id="WorkHours" name="WorkHours" type="text" value="<?php echo $row['WorkHours'];?>">

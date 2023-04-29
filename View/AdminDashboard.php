@@ -192,7 +192,7 @@
             <h3>Project Assinment</h3> 
           </div>
           <div class="flip-card-back">
-            <a href="Admin files/ProjectAssinment.html"><img src="Images/project.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
+            <a href="Admin files/ProjectAssinment.php"><img src="Images/project.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
           </div>
         </div>
       </div></div>
@@ -219,33 +219,40 @@
           <h1>Admin Users</h1>
         </div>
         </div>
+       
         <table>
-        <tr>
-            <th>Admin_ID</th>
+      <tr>
+      <th>Admin_ID</th>
             <th>FName</th>
             <th>LName</th>
             <th>UserName</th>
             <th>Password</th>
             <th>Authority</th>
         </tr>
+        <?php include('conn.php');?>
         <?php
-       $conn=mysqli_connect("localhost","root","","employee_management_system");
-       if($conn->connect_error){
-        die("connection failed:".$conn->connect_error);
+       $sql="SELECT * FROM admin";
+       
+       $result=mysqli_query($conn,$sql);
+       if(!$result){
+           die("retreiving failed".mysqli_error($conn));
        }
-        $sql="SELECT Admin_ID,FName,LName,UserName,Password,Authority FROM admin";
-        $result=$conn->query($sql);
-        if($result-> num_rows > 0){
-            while($rows=$result->fetch_assoc()){
-                echo"<tr><td>".$rows["Admin_ID"]."</td><td>".$rows["FName"]."</td><td>".$rows["LName"]
-                ."</td><td>".$rows["UserName"]."</td><td>".$rows["Password"]."</td><td>".$rows["Authority"]."</td></tr>";
-            }
-            echo"</table>";
-        }
-        else{
-             echo"0 reult";
-        }
-        $conn->close();
+
+       else{
+           while($row=mysqli_fetch_assoc($result)){
+                 ?>
+           <tr>
+                 <td><?php echo $row['Admin_ID'];?></td>
+                 <td><?php echo $row['FName'];?></td>
+                 <td><?php echo $row['LName'];?></td>
+                 <td><?php echo $row['UserName'];?></td>
+                 <td><?php echo $row['Password'];?></td>
+                 <td><?php echo $row['Authority'];?></td>
+                
+           </tr>
+           <?php
+           }
+     }
         ?>
     </table>
       </div>
@@ -297,7 +304,47 @@
           <div class="text">
           <h1>Profile Edit</h1>
         </div>
-        </div></div>
+        </div>
+        <?php
+$UName= $_SESSION['UserName'];          
+$sql="SELECT UserName,Password FROM admin where UserName='$UName'";
+$result=mysqli_query($conn,$sql);
+if(!$result){
+  die("retreiving failed".mysqli_error($conn));
+}
+
+else{
+  while($row=mysqli_fetch_assoc($result)){
+
+?>
+
+ <br><br><table>
+    
+          <tr>
+          <th>UserName</th>
+          <td><?php echo $row['UserName'];?></td></tr>
+          <tr>
+          <th>Password</th>
+          <td><?php echo $row['Password'];?></td></tr>
+ </table><br><br>
+     
+                  <div class="text">
+                  <a class="btn btn-primary" role="button" href="ADProfileUpdate.php?UserName=<?php echo $row['UserName'];?> ">Update</a>
+                  </div>
+                  <br><br>
+                  
+                  <?php
+
+  }
+}
+?>
+
+<center>
+<?php 
+if(isset($_GET['update_msg'])){
+echo"<h4>".$_GET['update_msg']."</h4>";
+}?>
+      </center>     </div>
     </section>
       </div>
       </div>

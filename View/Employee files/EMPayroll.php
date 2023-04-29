@@ -1,3 +1,4 @@
+<?php include("auth_session.php");?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,7 +12,7 @@
 <body>
 <div class="well">
         <div class="text">
-        <h1>Payroll Management</h1>
+        <h1>Employee Payroll</h1>
       </div>
       </div>
       
@@ -21,18 +22,24 @@
       <tr>
           <th>Payroll_ID</th>
           <th>Emp_ID</th>
+          <th>User name</th>
           <th>Dep_ID</th>
           <th>Wage</th>
           <th>Allowance</th>
           <th>Deductions</th>
           <th>Taxes</th>
+          <th>Date</th>
           <th>WorkHours</th>
           <th>Salary</th>
           
         </tr>
         <?php include('dbConnection.php');?>
         <?php
-        $sql="SELECT * FROM payroll";
+      
+        if ($_SESSION['UserName']) {
+           $UName= $_SESSION['UserName'] ;
+          } 
+        $sql="SELECT * FROM payroll WHERE UserName='$UName'";
        
         $result=mysqli_query($conn,$sql);
         if(!$result){
@@ -45,11 +52,13 @@
             <tr>
                   <td><?php echo $row['Payroll_ID'];?></td>
                   <td><?php echo $row['Emp_ID'];?></td>
+                  <td><?php echo $row['UserName'];?></td>
                   <td><?php echo $row['Dep_ID'];?></td>
                   <td><?php echo $row['Wage'];?></td>
                   <td><?php echo $row['Allowance'];?></td>
                   <td><?php echo $row['Deductions'];?></td>
                   <td><?php echo $row['Taxes'];?></td>
+                  <td><?php echo $row['Date'];?></td>
                   <td><?php echo $row['WorkHours'];?></td>
                   <td><?php echo $row['Salary'];?></td>
                  
