@@ -233,5 +233,70 @@ li {
       });
     })(jQuery);
   </script>
-</body>
+
+/*
+<?php
+if(isset($_POST['Update_EMP'])){
+  
+ $UName= $_SESSION['UserName'];
+
+$Username=$_POST['UserName'];
+$Email=$_POST['Email'];
+$Password=$_POST['Password'];
+
+
+$sql="UPDATE registration SET Email='$Email',UserName='$Username',Password='$Password' WHERE UserName='$UName'";
+$result=mysqli_query($conn,$sql);
+if(!$result){
+    die("query failed".mysqli_error($conn));
+}else{
+  header('location:Employee Dashboard.php?update_msg=Successfully updated!');
+  
+}
+}
+
+?>
+<form class="form1" action="Employee Dashboard.php" method="post" >
+      
+     
+        <label>Email</label>
+        <input id="Email" name="Email" type="email" value="<?php echo $row['Email'];?>">
+  
+        <label >User Name</label>
+        <input id="UserName" name="UserName"  type="text" value="<?php echo $row['UserName'];?>">
+  
+        <label>Password</label>
+        <input id="Password" name="Password" type="text" value="<?php echo $row['Password'];?>">
+        <div class="text">
+        <button id="Update_EMP"  name="Update_EMP" type="submit" value="UPDATE">Save</button>
+      </div>
+      </form><br>
+      <center>
+<?php 
+if(isset($_GET['update_msg'])){
+echo"<h4>".$_GET['update_msg']."</h4>";
+}?>
+      </center>
+*/</body>
 </html>
+
+admin users 
+<?php
+$conn=mysqli_connect("localhost","root","","employee_management_system");
+if($conn->connect_error){
+ die("connection failed:".$conn->connect_error);
+}
+ $sql="SELECT Admin_ID,FName,LName,UserName,Password,Authority FROM admin";
+ $result=$conn->query($sql);
+ if($result-> num_rows > 0){
+     while($rows=$result->fetch_assoc()){
+         echo"<tr><td>".$rows["Admin_ID"]."</td><td>".$rows["FName"]."</td><td>".$rows["LName"]
+         ."</td><td>".$rows["UserName"]."</td><td>".$rows["Password"]."</td><td>".$rows["Authority"]."</td></tr>";
+     }
+     echo"</table>";
+ }
+ else{
+      echo"0 reult";
+ }
+ $conn->close();
+ ?>

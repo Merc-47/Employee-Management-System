@@ -1,4 +1,5 @@
 <?php include("auth_session.php");?>
+<?php include('conn.php');?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,14 +22,14 @@
   <div class="container-fluid">
     <div class="row content">
       <div class="col-sm-3 sidenav hidden-xs">
-        
+        <div class="bg">
         <div class="col-sm-9">
           <div class="row">
             <div class="col-sm-4">
               <div class="width">
                 <div class="d-flex align-items-center mb-4">
                         
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
+                  <img src="images/profile.png"
                     alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
                     style="width: 70px;">
                   <div class="d-flex flex-row align-items-center mb-2">
@@ -54,7 +55,7 @@
           <li data-rel="5"><a href="#section5"><a href="logout.php">Logout</a></a></li><br>
         </ul>
       </nav>
-      </div>
+      </div></div>
       </div>
       <section>
       <div class="col-sm-9">
@@ -164,12 +165,78 @@
           <h1>General</h1>
         </div>
       </div>
+
+      <?php
+        $sql = "SELECT UserName,S_Assinments FROM progress ORDER BY S_Assinments ";
+$result = mysqli_query($conn, $sql);
+$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+// Prepare the chart data
+$labels = array_column($data, 'UserName');
+$values = array_column($data, 'S_Assinments');
+$chart_data = array(
+    'labels' => $labels,
+    'datasets' => array(
+        array(
+            'label' => 'Successful Assinments',
+            'backgroundColor' => '#3498db',
+            'data' => $values,
+        ),
+    ),
+);
+?>
+
+<?php 
+       
+$result = $conn->query("SELECT (SELECT COUNT(*) FROM employee) AS total_employee_count, 
+COUNT(Emp_ID) AS current_date_attendance_count FROM attendance 
+RIGHT JOIN employee ON Emp_ID = Employee_ID AND Date = CURDATE()");
+
+$row = $result->fetch_assoc();
+
+$TEmpCount = $row['total_employee_count'];
+$TAttendCount = $row['current_date_attendance_count'];
+
+?>
+
    <div class="flex">
       <div class="paddingchart">
-      <div class="chartbg"><canvas id="myChartPie" style="width:150px;height:100px;" ></canvas></div>
+      <div class="chartbg"><canvas id="attendance-pie-chart" style="width:150px;height:100px;" ></canvas>
+      <script>
+       var ctx = document.getElementById('attendance-pie-chart').getContext('2d');
+var myPieChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ['Present', 'Absent'],
+    datasets: [{
+      data: [<?php echo $TAttendCount; ?>, <?php echo $TEmpCount - $TAttendCount ; ?>],
+      backgroundColor: ['#36A2EB', '#FF6384'],
+    }]
+  }
+});
+    </script>
+    </div>
     </div>
       <div class="paddingchart">
-      <div class="chartbg"><canvas id="myChartLine" style="width:150px;height: 100px;"></canvas></div>
+      <div class="chartbg"><canvas id="myChartprogress" style="width:150px;height: 100px;"></canvas>
+      <script>
+        var ctx = document.getElementById('myChartprogress').getContext('2d');
+var chart_data = <?php echo json_encode($chart_data); ?>;
+var myChartprogress = new Chart(ctx, {
+    type: 'bar',
+    data: chart_data,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+      </Script>
+    </div>
     </div>
     </div>
     <div class="flex">
@@ -229,7 +296,7 @@
             <th>Password</th>
             <th>Authority</th>
         </tr>
-        <?php include('conn.php');?>
+       
         <?php
        $sql="SELECT * FROM admin";
        

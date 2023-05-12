@@ -1,4 +1,5 @@
 <?php include("auth_session.php");?>
+<?php include('conn.php');?>
 <?php 
 
 ?>
@@ -31,7 +32,7 @@
               <div class="width">
                 <div class="d-flex align-items-center mb-4">
                         
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp"
+                  <img src="images/profile.png"
                     alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
                     style="width: 70px;">
                   <div class="d-flex flex-row align-items-center mb-2">
@@ -131,7 +132,7 @@
             </div>
           </div></div>      
         </div>
-
+        
       </div>
     </section>
     <section>
@@ -141,13 +142,35 @@
           <h1>Progress</h1>
         </div>
       </div>
+      <?php 
+      $UserName= $_SESSION['UserName'];
+$result = $conn->query("SELECT T_Assinments,S_Assinments FROM progress Where UserName='$UserName'");
+$row = $result->fetch_assoc();
+$totalAssinments = $row['T_Assinments'];
+$successfulAssinments = $row['S_Assinments'];
+?>
    <div class="flex">
       <div class="paddingchart">
-      <div class="chartbg"><canvas id="myChartPie" style="width:150px;height:100px;" ></canvas></div>
+      <div class="chartbg"><canvas id="pie-chart" style="width:150px;height:100px;"></canvas>
+
+      <script>
+        var ctx = document.getElementById('pie-chart').getContext('2d');
+var myPieChart = new Chart(ctx, {
+  type: 'pie',
+  data: {
+    labels: ['Completed', 'Failed'],
+    datasets: [{
+      data: [<?php echo $successfulAssinments; ?>, <?php echo $totalAssinments - $successfulAssinments ; ?>],
+      backgroundColor: ['#36A2EB', '#FF6384'],
+    }]
+  }
+});
+    </script>
+    </div>
     </div>
  
    </div>
-      <?php include('Admin files/dbConnection.php');?>
+      
       
 <?php
 

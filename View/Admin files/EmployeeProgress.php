@@ -30,6 +30,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="Dashboard.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="well">
@@ -39,9 +40,66 @@
       </div>
       <a class="btn btn-primary" role="button" href="http://localhost/EMS/View/AdminDashboard.php">Dashboard</a>
       <br><br>
+
+      <?php 
+      $sql = "SELECT UserName, S_Assinments, T_Assinments FROM progress GROUP BY S_Assinments";
+      $result = mysqli_query($conn, $sql);
+      
+      // Format the data for use in Chart.js
+      $data = array();
+      while ($row = mysqli_fetch_assoc($result)) {
+          $data[] = array("x" => $row["UserName"] . "/" . $row["T_Assinments"], "y" => $row["S_Assinments"]);
+      }
+      
+      // Close the database connection
+      mysqli_close($conn);
+      ?>
+      
     <div class="flex">
     <div class="paddingchart">
-        <div class="chartbg"><canvas id="myChartLineOne" style="width:150px;height: 100px;"></canvas></div>
+        <div class="chartbg"><canvas id="myChartLine" style="width:150px;height: 100px;"></canvas>
+        <script>
+var data = <?php echo json_encode($data); ?>;
+var ctx = document.getElementById('myChartLine').getContext('2d');
+var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        datasets: [{
+            label: 'Successful Assinments ',
+            data: data,
+            backgroundColor: 'rgba(0, 0, 255, 0.2)',
+            borderColor: 'rgba(0, 0, 255, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            xAxes: [{
+                type: 'time',
+                time: {
+                    parser: 'YYYY MM DD',
+                    tooltipFormat: 'll',
+                    unit: 'day',
+                    displayFormats: {
+                        day: 'MM/DD/YYYY'
+                    }
+                },
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Date'
+                }
+            }],
+            yAxes: [{
+                scaleLabel: {
+                    display: true,
+                    labelString: 'Value'
+                }
+            }]
+        }
+    }
+});
+</script>
+      </div>
       </div>
    
       <div class="paddingchart">
