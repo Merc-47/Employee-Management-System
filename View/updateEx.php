@@ -1,62 +1,50 @@
+<style>
+  .file-link {
+    display: block;
+    margin-bottom: 10px;
+    color: #0077cc;
+    font-size: 16px;
+    text-decoration: none;
+    text-transform: capitalize;
+  }
+
+  .file-link:hover {
+    text-decoration: underline;
+  }
+</style>
 <?php
- 
-$dataPoints = array();
-//Best practice is to create a separate file for handling connection to database
-try{
-     // Creating a new connection.
-    // Replace your-hostname, your-db, your-username, your-password according to your database
-    $link = new \PDO(   'mysql:host=localhost;dbname=employee_management_system;charset=utf8mb4', //'mysql:host=localhost;dbname=canvasjs_db;charset=utf8mb4',
-                        'root', //'root',
-                        '', //'',
-                        array(
-                            \PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-                            \PDO::ATTR_PERSISTENT => false
-                        )
-                    );
-	
-    $handle = $link->prepare('Select Emp_ID,Attendance_ID from attendance '); 
-    $handle->execute(); 
-    $result = $handle->fetchAll(\PDO::FETCH_OBJ);
-		
-    foreach($result as $row){
-        
-        array_push($dataPoints, array("x"=> $row->Emp_ID,"y"=> $row->Attendance_ID));
-        
+
+// Define the directory to list
+$dir = 'uploads/';
+
+// Make sure the directory exists and is a subdirectory of the uploads folder
+if (is_dir($dir) && strpos(realpath($dir), realpath('uploads')) === 0) {
+
+  // Open the directory
+  $dh = opendir($dir);
+
+  // Loop through all the files in the directory
+  while (($file = readdir($dh)) !== false) {
+
+    // Ignore the current and parent directory markers
+    if ($file != '.' && $file != '..') {
+
+      // Display the filename as a link to download the file
+      echo '<a href="' . $dir . $file . '">' . $file . '</a><br>';
+
     }
-	$link = null;
+
+  }
+
+  // Close the directory
+  closedir($dh);
+
+} else {
+
+  // Display an error message if the directory doesn't exist or is not a subdirectory of uploads
+  echo 'Directory not found or not allowed.';
+
 }
-catch(\PDOException $ex){
-    print($ex->getMessage());
-}
-	
+
 ?>
-<!DOCTYPE HTML>
-<html>
-<head>  
-<script>
-  
-window.onload = function () {
- 
-var chart = new CanvasJS.Chart("chartContainer", {
-	animationEnabled: true,
-	exportEnabled: true,
-	theme: "light1", // "light1", "light2", "dark1", "dark2"
-	title:{
-		text: "PHP Column Chart from Database"
-	},
-	data: [{
-       
-		type: "pie", //change type to bar, line, area, pie, etc  
-		dataPoints: <?php echo json_encode($dataPoints); ?>
-	}]
-});
-chart.render();
- 
-}
-</script>
-</head>
-<body>
-<div id="chartContainer" style="height: 370px; width: 100%;"></div>
-<script src="https://cdn.canvasjs.com/canvasjs.min.js"></script>
-</body>
-</html>                              
+

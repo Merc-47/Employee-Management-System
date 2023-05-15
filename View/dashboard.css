@@ -8,11 +8,18 @@ body{
       justify-content: center;
       font-family: 'Times New Roman', Times, serif;
   }
+  .banner{
+    background-color:	#c1d7f3;
+    border: 1px solid #337ab7;
+    justify-content: center;
+    width:100%;
+    height:240px;
+  }
   
       .row.content {height: 550px}
       
       .sidenav {
-        background-color: #cee4f1;
+        background-color: #77b6da;
         height:auto;
         
       }
@@ -67,9 +74,9 @@ body{
 }
       .width{
         width:275px;
-        background-color:#cee4f1;
+        background-color:#1d3949;
         text-align: center;
-        border:1px solid white;
+        border: 10px solid whitesmoke;
       }
       .well{
         background-color:#337ab7 ;
@@ -86,12 +93,13 @@ body{
         background-color: dodgerblue;
       }
       .chartbg{
-        background-color:	#8293ee;
-        border: 1px solid black;
+        background-color:	#c1d7f3;
+        border: 1px solid #337ab7;
         justify-content: center;
         width:420px;
         height:300px;
       }
+      
       .padding{
         padding: 20px;
         padding-left: 50px;
@@ -116,12 +124,13 @@ body{
 
       table {
         font-family: arial, sans-serif;
-        border-collapse: collapse;
+       /* border-collapse: collapse;*/
+        border: 1px solid #337ab7;
         width: 100%;
       }
       
       td, th {
-        border: 1px solid #dddddd;
+        border: 1px solid #337ab7;
         text-align: left;
         padding: 8px;
       }

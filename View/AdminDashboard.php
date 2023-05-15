@@ -15,7 +15,9 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
   <link rel="stylesheet"href="dashboard.css">
-  <link rel="stylesheet" href="Mail.css">
+  <style>
+    
+  </style>
 </head>
 
 <body>
@@ -28,7 +30,7 @@
             <div class="col-sm-4">
               <div class="width">
                 <div class="d-flex align-items-center mb-4">
-                        
+                        <br>
                   <img src="images/profile.png"
                     alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
                     style="width: 70px;">
@@ -40,7 +42,7 @@
                     <p class="mb-0 me-2"></p>
                     <nav>
                       <ul class="nav nav-pills nav-stacked">
-                    <li data-rel="5"><button type="button" class="btn btn-primary">Edit</button></li>
+                    <li data-rel="4"><button type="button" class="btn btn-primary">Edit</button></li>
                     </ul></nav>
                   </div>
                 </div>  
@@ -51,19 +53,61 @@
           <li data-rel="1" class="active"><a href="#section1">Dashboard</a></li><br><br>
           <li data-rel="2" ><a href="#section2">General</a></li><br><br>
           <li data-rel="3"><a href="#section3">Admin users</a></li><br><br>
-          <li data-rel="4"><a href="#section4">Mail</a></li><br><br><br><br><br><br><br><br><hr>
-          <li data-rel="5"><a href="#section5"><a href="logout.php">Logout</a></a></li><br>
+          <li data-rel="4"><a href="#section4"></a><br><br><br><br><br><br><br><hr>
+          <li data-rel="5"><a href="#section5"><a href="logout.php">Logout</a></a></li><br><br><br>
+          
         </ul>
       </nav>
       </div></div>
       </div>
       <section>
       <div class="col-sm-9">
+      <div class="text">
         <div class="well">
-          <div class="text">
           <h1>Dashboard</h1>
         </div>
+        <?php
+        $sql = "SELECT UserName,S_Assinments FROM progress ORDER BY S_Assinments DESC ";
+$result = mysqli_query($conn, $sql);
+$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+// Prepare the chart data
+$labels = array_column($data, 'UserName');
+$values = array_column($data, 'S_Assinments');
+$chart_data = array(
+    'labels' => $labels,
+    'datasets' => array(
+        array(
+            'label' => 'Most Successful Assinments',
+            'backgroundColor' => '#3498db',
+            'data' => $values,
+        ),
+    ),
+);
+?>
+        <div class="banner">
+        <canvas id="Allprogress" style="width:150px;height: 55px;"></canvas>
+        <script>
+        var ctx = document.getElementById('Allprogress').getContext('2d');
+var chart_data = <?php echo json_encode($chart_data); ?>;
+var Allprogress = new Chart(ctx, {
+    type: 'bar',
+    data: chart_data,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+      </Script>
+      </div>
         </div>
+
+        
         <div class="flex">
           <div class="padding">
           <div class="flip-card">
@@ -137,10 +181,8 @@
                 <a href="Admin files/FeedbackManagement.php"> <img src="Images/feedback.jfif" alt="Avatar" style="width:150px;height:125px;"></a>
               </div>
             </div>
-          </div></div>      
-        </div>
-
-        <div class="flex">
+          </div></div>  
+          
           <div class="padding">
           <div class="flip-card">
             <div class="flip-card-inner">
@@ -152,7 +194,6 @@
               </div>
             </div>
           </div></div>
-
           
         </div>
 
@@ -201,6 +242,7 @@ $TAttendCount = $row['current_date_attendance_count'];
 
    <div class="flex">
       <div class="paddingchart">
+      <h4>Todays Attendance</h4>
       <div class="chartbg"><canvas id="attendance-pie-chart" style="width:150px;height:100px;" ></canvas>
       <script>
        var ctx = document.getElementById('attendance-pie-chart').getContext('2d');
@@ -215,9 +257,11 @@ var myPieChart = new Chart(ctx, {
   }
 });
     </script>
+   
     </div>
     </div>
       <div class="paddingchart">
+      <h4>Current Employee Progress</h4>
       <div class="chartbg"><canvas id="myChartprogress" style="width:150px;height: 100px;"></canvas>
       <script>
         var ctx = document.getElementById('myChartprogress').getContext('2d');
@@ -286,7 +330,7 @@ var myChartprogress = new Chart(ctx, {
           <h1>Admin Users</h1>
         </div>
         </div>
-       
+       <br><br>
         <table>
       <tr>
       <th>Admin_ID</th>
@@ -325,52 +369,17 @@ var myChartprogress = new Chart(ctx, {
       </div>
 
     </section>
-    <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Mail</h1>
-        </div>
-        </div>
-        
-          <div class="regform">
-            <form class="form1" action="">
-
-              <label>Sender Email </label>
-           <input id="SenderEmail" type="text">
-           
-            <label>Recipient Email </label>
-           <input id="Recipient" type="text">
-
-            <label>Subject </label>
-           <input id="Subject" type="text">
-            
-             <label>Message</label>
-            <textarea id="Reason" rows="5" cols="50"></textarea>
-
-            <label for="myfile">Select files:</label>
-            <input type="file" id="myfile" name="myfile" multiple>
-            
-            <div class="text">
-              <button>Send</button>
-              
-            </div>
-            
-          </form>
-          <div class="text">
-            <br><br> <button>Inbox</button>
-          </div>
-          </div>
-          
-      </div>
-    </section>
+    
     
     <section>
       <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
+      <div class="text">
+      <div class="well">
           <h1>Profile Edit</h1>
         </div>
+        <img src="images/profile.png"
+                    alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
+                    style="width: 200px;height:200px;">
         </div>
         <?php
 $UName= $_SESSION['UserName'];          

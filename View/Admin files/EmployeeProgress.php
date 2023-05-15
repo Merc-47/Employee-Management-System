@@ -139,14 +139,80 @@ var chart = new Chart(ctx, {
       </div>
       </div>
       <div class="text">
-        <table><tr>
-                <h2>Extra Materials</h2></tr>
-                <td><label for="myfile">Select files:</label>
-                       <input type="file" id="myfile" name="myfile" multiple></td>
-                       <td><button>Submit</button></td>
-                    </table>
+      <div class="well">
+         <h2>Work Materials</h2></tr>
+      </div>
+        <form class="form1" method="post" action="EmployeeProgress.php"   enctype="multipart/form-data">
+		<label for="file">Select a file to upload:</label>
+		<input type="file" name="file" id="file">
+		
+        <div class="text">
+        <button id="buttonAdd"  name="submit" type="submit" value="upload">Upload</button>
+      </div>
+	</form>
                        </div>
+        <br><br><center>
+        <?php
+if(isset($_POST["submit"])) {
+	// Check if a file was uploaded
+	if(isset($_FILES["file"])) {
+		$file = $_FILES["file"];
+
+		// Get the file name and type
+		$file_name = $file["name"];
+		$file_type = $file["type"];
+
+		// Set the destination path for the uploaded file
+		$destination_path = "../uploads/";
+		$file_path = $destination_path . $file_name;
+
+		// Move the uploaded file to the destination path
+		if(move_uploaded_file($file["tmp_name"], $file_path)) {
+			// Redirect to the download page with the file name as a parameter
+			header("Location: EmployeeProgress.php?file=$file_name");
+			exit();
+		}
+		else {
+			// Handle the error case
+			echo "Failed to upload file.";
+		}
+	}
+	else {
+		// Handle the case where no file was uploaded
+		echo "No file uploaded.";
+	}
+}
+?>
+<br>
+</center>
+<div class="text">
+      <div class="well">
+         <h2>Extra Materials</h2></tr>
+      </div>
+		<form class="form1">
+      <input type="text" id="videoLinksInput" placeholder="Enter video links">
+<button onclick="viewVideos()">Upload</button>
+        </form>
+<script>
+  function viewVideos() {
+    const videoLinks = document.getElementById('videoLinksInput').value.split('\n').map(link => link.trim());
+
+    // Retrieve the previously stored video links from local storage
+    let existingVideoLinks = JSON.parse(localStorage.getItem('videoLinks')) || [];
+
+    // Append the new video links to the existing links
+    existingVideoLinks = existingVideoLinks.concat(videoLinks);
+
+    // Store the updated video links in local storage
+    localStorage.setItem('videoLinks', JSON.stringify(existingVideoLinks));
+
+   
+  }
+</script>
+		
         
-      <script src="Dashboard.js"></script>
+	
+                       </div>
+        <br><br>
 </body>
 </html>

@@ -31,7 +31,7 @@
             <div class="col-sm-4">
               <div class="width">
                 <div class="d-flex align-items-center mb-4">
-                        
+                        <br>
                   <img src="images/profile.png"
                     alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
                     style="width: 70px;">
@@ -43,7 +43,7 @@
                     <p class="mb-0 me-2"></p>
                     <nav>
                       <ul class="nav nav-pills nav-stacked">
-                    <li data-rel="5"><button type="button" class="btn btn-primary">Edit</button></li>
+                    <li data-rel="4"><button type="button" class="btn btn-primary">Edit</button></li>
                     </ul></nav>
                   </div>
                 </div>  
@@ -54,18 +54,57 @@
           <li data-rel="1" class="active"><a href="#section1">Dashboard</a></li><br><br>
           <li data-rel="2" ><a href="#section2">Progress</a></li><br><br>
           <li data-rel="3"><a href="#section3">Work Material</a></li><br><br>
-          <li data-rel="4"><a href="#section4">Mail</a></li><br><br><br><br><br><br><br><br><hr>
-          <li data-rel="5"><a href="#section5"><a href="logout.php">Logout</a></a></li><br>
+          <li data-rel="4"><a href="#section4"></a><br><br><br><br><br><br><br><hr>
+          <li data-rel="5"><a href="#section5"><a href="logout.php">Logout</a></a></li><br><br><br>
         </ul>
       </nav>
       </div>
       </div>
       <section>
       <div class="col-sm-9">
+      <div class="text">
         <div class="well">
-          <div class="text">
           <h1>Dashboard</h1>
         </div>
+        <?php
+        $sql = "SELECT UserName,S_Assinments FROM progress ORDER BY S_Assinments DESC ";
+$result = mysqli_query($conn, $sql);
+$data = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+// Prepare the chart data
+$labels = array_column($data, 'UserName');
+$values = array_column($data, 'S_Assinments');
+$chart_data = array(
+    'labels' => $labels,
+    'datasets' => array(
+        array(
+            'label' => 'Most Successful Assinments',
+            'backgroundColor' => '#3498db',
+            'data' => $values,
+        ),
+    ),
+);
+?>
+        <div class="banner">
+        <canvas id="Allprogress" style="width:150px;height: 55px;"></canvas>
+        <script>
+        var ctx = document.getElementById('Allprogress').getContext('2d');
+var chart_data = <?php echo json_encode($chart_data); ?>;
+var Allprogress = new Chart(ctx, {
+    type: 'bar',
+    data: chart_data,
+    options: {
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+      </Script>
+      </div>
         </div>
         <div class="flex">
           <div class="padding">
@@ -92,7 +131,12 @@
             </div>
           </div></div>
 
-          <div class="padding">
+          
+        </div>
+
+<div class="flex">
+
+<div class="padding">
           <div class="flip-card">
             <div class="flip-card-inner">
               <div class="flip-card-front">
@@ -103,9 +147,7 @@
               </div>
             </div>
           </div></div>      
-        </div>
 
-<div class="flex">
           <div class="padding">
           <div class="flip-card">
             <div class="flip-card-inner">
@@ -127,7 +169,7 @@
                 <h3>Extras</h3> 
               </div>
               <div class="flip-card-back">
-                <a href="Employee files/Extras.html"> <img src="Images/generate.png" alt="Avatar" style="width:150px;height:125px;"></a>
+                <a href="Employee files/Extras.php"> <img src="Images/generate.png" alt="Avatar" style="width:150px;height:125px;"></a>
               </div>
             </div>
           </div></div>      
@@ -148,11 +190,13 @@ $result = $conn->query("SELECT T_Assinments,S_Assinments FROM progress Where Use
 $row = $result->fetch_assoc();
 $totalAssinments = $row['T_Assinments'];
 $successfulAssinments = $row['S_Assinments'];
-?>
-   <div class="flex">
+?><div class="text">
+<h2>Assinment Completion</h2>
+  </div>
+   <div class="flex"> 
       <div class="paddingchart">
       <div class="chartbg"><canvas id="pie-chart" style="width:150px;height:100px;"></canvas>
-
+      
       <script>
         var ctx = document.getElementById('pie-chart').getContext('2d');
 var myPieChart = new Chart(ctx, {
@@ -166,6 +210,7 @@ var myPieChart = new Chart(ctx, {
   }
 });
     </script>
+   
     </div>
     </div>
  
@@ -212,96 +257,62 @@ $sql="SELECT * FROM progress WHERE UserName = '$UserName'";
       
  
         ?>
-      
+      <br>
     </div>
       
     </section>
     <section>
       <div class="col-sm-9">
+      <div class="text">
         <div class="well">
-          <div class="text">
           <h1>Work Material</h1>
-        </div>
-        </div>
-        <table>
-          <tr>
-            <th>Admin</th>
-            <th>Status</th>
-            
-          </tr>
-          <tr>
-            <td>Jack Reacher</td>
-            <td>online</td>
-            
-          </tr>
-          <tr>
-            <td>David Goggins</td>
-            <td>offline</td>
-            
-          </tr>
-          <tr>
-            <td>Ernst Handel</td>
-            <td>offline</td>
-            
-          </tr>
-          <tr>
-            <td>Giorno Giovanna</td>
-            <td>offline</td>
-            
-          </tr>
-          <tr>
-            <td>Edward Kenway</td>
-            <td>offline</td>
-           
-          </tr>
-          
-        </table>
+        </div><br><br>
+        <h2>Download Files Here</h2>
+        <br><br><table style="border: 1px solid #337ab7;"><tr><th></th><td>
+        <?php
+
+
+$dir = 'uploads/';
+if (is_dir($dir) && strpos(realpath($dir), realpath('uploads')) === 0) {
+
+  $dh = opendir($dir);
+
+  while (($file = readdir($dh)) !== false) {
+
+    if ($file != '.' && $file != '..') {
+
+      echo '<a href="' . $dir . $file . '">' . $file . '</a><br>';
+
+    }
+
+  }
+
+  closedir($dh);
+
+} else {
+  echo 'Directory not found or not allowed.';
+}
+
+?>
+</td></tr>
+</table>
+<p><h3>Download the corresponding  work materials according to your needs</h3></p>
+</div>
       </div>
 
     </section>
-    <section>
-      <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
-          <h1>Mail</h1>
-        </div>
-        </div>
-        <div class="regform">
-          <form class="form1" action="">
-
-            <label>Sender Email </label>
-         <input id="SenderEmail" type="text">
-         
-          <label>Recipient Email </label>
-         <input id="Recipient" type="text">
-
-          <label>Subject </label>
-         <input id="Subject" type="text">
-          
-           <label>Message</label>
-          <textarea id="Reason" rows="5" cols="50"></textarea>
-
-          <label for="myfile">Select files:</label>
-        <input type="file" id="myfile" name="myfile" multiple>
-          
-          <div class="text">
-            <button>Send</button>
-          </div>
-        </form>
-        <div class="text">
-          <br><br> <button>Inbox</button>
-        </div>
-        </div>
-      </div>
-    </section>
+    
     
     <section>
       <div class="col-sm-9">
-        <div class="well">
-          <div class="text">
+      <div class="text">
+      <div class="well">
           <h1>Profile Edit</h1>
-        </div></div>
-       
+        </div>
+        <img src="images/profile.png"
+                    alt="Generic placeholder image" class="img-fluid rounded-circle border border-dark border-3"
+                    style="width: 200px;height:200px;">
+                    </div>
         <?php
 $UName= $_SESSION['UserName'];          
 $sql="SELECT Email,UserName,Password FROM registration where UserName='$UName'";
